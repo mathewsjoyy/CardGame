@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assignment2OOP
+namespace LincolnCardGame
 {
     class Deck
     {
@@ -21,17 +21,17 @@ namespace Assignment2OOP
         // Fill up the deck when a new object is instansiated
         private void CreateStandardDeck()
         {
-            List<string> suits = new List<string> { "Spades", "Hearts", "Diamonds", "Clubs", };
+            List<string> suits = new List<string> { "Spades", "Hearts", "Diamonds", "Clubs" };
             List<string> values = new List<string> { "2", "3", "4", "5", "6", "7", "8", "9",
                                                      "10", "Jack", "Queen", "King", "Ace" };
-            foreach(string suit in suits)
+            foreach (string suit in suits)
             {
-                foreach(string value in values)
+                foreach (string value in values)
                 {
                     Cards.Add(new Card(suit, value));
                 }
             }
-            Console.WriteLine($"Deck of {Cards.Count} cards created (No Jokers).\n");
+            Console.WriteLine($"\nDeck of {Cards.Count} cards created (No Jokers).");
         }
 
         public void Shuffle()
@@ -47,9 +47,10 @@ namespace Assignment2OOP
                 Cards[rng] = Cards[count];
                 Cards[count] = value;
             }
+            Console.WriteLine("The deck has been shuffled.\n");
         }
 
-        public string Deal()
+        public Card Deal()
         {
             // Mark sure the deck isnt empty
             if (IsEmpty() == false)
@@ -57,9 +58,9 @@ namespace Assignment2OOP
                 // Get card at top and return it
                 Card topCard = Cards[Cards.Count - 1];
                 Cards.Remove(topCard);
-                return topCard.ToString();
+                return topCard;
             }
-            return "No More Cards In The Deck";
+            return null;
         }
 
         public bool IsEmpty()

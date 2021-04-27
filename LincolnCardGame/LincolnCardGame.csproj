@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{EF2E4419-7238-4938-A99D-D9C234B57C78}</ProjectGuid>
+    <ProjectGuid>{E4A24460-7529-4AD1-A3F0-FE86EA390F0E}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Assignment2OOP</RootNamespace>
-    <AssemblyName>Assignment2OOP</AssemblyName>
+    <RootNamespace>LincolnCardGame</RootNamespace>
+    <AssemblyName>LincolnCardGame</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
