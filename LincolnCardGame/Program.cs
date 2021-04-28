@@ -12,7 +12,6 @@ namespace LincolnCardGame
         {
             playGame();
 
-
             Console.ReadKey();
         }
         private static void playGame()
@@ -37,6 +36,8 @@ namespace LincolnCardGame
             Console.ReadKey(); Console.Clear();
 
             var humanPlayedCards = humanPlayer.play2Cards();
+
+            var compPlayedCards = compPlayer.play2Cards();
 
 
         }

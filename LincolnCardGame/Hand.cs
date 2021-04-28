@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace LincolnCardGame
 {
-    class Hand
+    class Hand : IDisplayable
     {
         public List<Card> AHand { get; set; }
 
-        // Assign 10 cards from deck
+        // Assigns 10 cards from deck
         public Hand(Deck deck)
         {
             AHand = new List<Card>();
@@ -28,7 +28,7 @@ namespace LincolnCardGame
             }
         }
 
-        public void displayHand()
+        public void Display()
         {
             Console.WriteLine("=== CARDS CURRENTLY IN HAND ===");
             foreach (Card card in AHand) Console.WriteLine(card);

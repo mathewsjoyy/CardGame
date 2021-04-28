@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LincolnCardGame
 {
-    class Deck
+    class Deck : IDisplayable
     {
         // Fields
         public List<Card> Cards { get; private set; }
@@ -69,6 +69,11 @@ namespace LincolnCardGame
                 return true;
             else
                 return false;
+        }
+
+        public void Display()
+        {
+            foreach (Card card in Cards) Console.WriteLine(card);
         }
     }
 }
