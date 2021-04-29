@@ -7,9 +7,9 @@ namespace LincolnCardGame
         private static void Main(string[] args)
         {
             playGame();
-
             Console.ReadKey();
         }
+
         private static void playGame()
         {
             Console.WriteLine("---==== Welcome to the LINCOLN Card Game ====---");
@@ -24,15 +24,15 @@ namespace LincolnCardGame
             Deck deck = new Deck();
             deck.Shuffle();
 
+            Console.WriteLine("\n> Press any key to start!");
+            Console.ReadKey(); Console.Clear();
+
             // Make objects of the 2 players for the game
             Human humanPlayer = new Human(deck);
             Computer compPlayer = new Computer(deck);
 
-            Console.WriteLine("\n> Press any key to start!");
-            Console.ReadKey(); Console.Clear();
 
             var humanPlayedCards = humanPlayer.play2Cards();
-
             var compPlayedCards = compPlayer.play2Cards();
 
 

@@ -49,7 +49,7 @@ namespace LincolnCardGame
                 catch (Exception)
                 {
                     Console.Clear();
-                    Console.WriteLine("Seems your the card you want isnt avaliable!\n");
+                    Console.WriteLine("Seems the card you want isnt avaliable!\n");
                 }
             }
 
