@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LincolnCardGame
 {
-    class Human : Player
+    internal class Human : Player
     {
         public Human(Deck deck) : base(deck)
         {
@@ -32,7 +28,7 @@ namespace LincolnCardGame
                     var cardPosition2 = Convert.ToInt32(Console.ReadLine());
 
                     // Check they havent choosen the same card twice
-                    if(cardPosition1 == cardPosition2)
+                    if (cardPosition1 == cardPosition2)
                     {
                         Console.Clear();
                         Console.WriteLine("Sorry you cant choose the same card twice! Try again.\n");

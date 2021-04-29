@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LincolnCardGame
 {
-    class Computer : Player
+    internal class Computer : Player
     {
         public Computer(Deck deck) : base(deck)
         {

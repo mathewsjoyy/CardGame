@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LincolnCardGame
+﻿namespace LincolnCardGame
 {
-    class Card
+    internal class Card
     {
         // Fields 
         public string Suit { get; private set; }
@@ -53,7 +47,7 @@ namespace LincolnCardGame
         }
 
         // Operator overloading to add 2 cards together by their point value
-        public static int operator+(Card card1, Card card2) => card1.pointValue + card2.pointValue;
+        public static int operator +(Card card1, Card card2) => card1.pointValue + card2.pointValue;
 
     }
 }

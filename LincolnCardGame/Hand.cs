@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LincolnCardGame
 {
-    class Hand : IDisplayable
+    internal class Hand : IDisplayable
     {
         public List<Card> AHand { get; set; }
 

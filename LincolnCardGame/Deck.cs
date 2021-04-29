@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LincolnCardGame
 {
-    class Deck : IDisplayable
+    internal class Deck : IDisplayable
     {
         // Fields
         public List<Card> Cards { get; private set; }
