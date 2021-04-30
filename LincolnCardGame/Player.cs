@@ -13,19 +13,18 @@ namespace LincolnCardGame
             playerHand = new Hand(deck);
         }
 
-        // 
-        public void pointWon()
+        // Method to call once a player wins a round
+        public void pointWon(int points = 1)
         {
-            Score += 1;
-            Console.WriteLine($"Player {ID} won a point! their new score is {Score}");
+            Score += points;
+            Console.WriteLine($"\nPlayer {ID} has won the Round and a Point! their new score is {Score}\n");
         }
 
         public abstract Tuple<Card, Card> play2Cards();
 
         public void Display()
         {
-            Console.WriteLine($"Player Details - Player ID : {ID}\nPlayer Score : {Score}");
+            Console.WriteLine($"Player {ID} Details:\n>Player Score : {Score}");
         }
-
     }
 }

@@ -8,7 +8,7 @@ namespace LincolnCardGame
         // Fields
         public List<Card> Cards { get; private set; }
 
-        // Constructor 
+        // Constructor
         public Deck()
         {
             Cards = new List<Card>();

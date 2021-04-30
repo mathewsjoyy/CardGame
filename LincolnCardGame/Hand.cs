@@ -5,7 +5,7 @@ namespace LincolnCardGame
 {
     internal class Hand : IDisplayable
     {
-        public List<Card> AHand { get; set; }
+        public List<Card> AHand { get; private set; }
 
         // Assigns 10 cards from deck
         public Hand(Deck deck)
@@ -27,7 +27,7 @@ namespace LincolnCardGame
 
         public void Display()
         {
-            Console.WriteLine("=== CARDS CURRENTLY IN HAND ===");
+            Console.WriteLine("\n=== Cards currently in your hand ===");
             foreach (Card card in AHand) Console.WriteLine(card);
         }
 
