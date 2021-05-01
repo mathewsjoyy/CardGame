@@ -23,8 +23,25 @@ namespace LincolnCardGame
                 "\n6. If the final hands are the same value, draw a random card from the remaining cards highest wins the hand." +
                 "\n> (Look out for messages starting and ending with '===', these show the state of the game");
 
-            Console.WriteLine("\n> Press any key to start!");
-            Console.ReadKey(); Console.Clear();
+            while (true)
+            {
+                Console.WriteLine("\n> Press ENTER To Start or ESC to End The Game");
+                ConsoleKeyInfo option = Console.ReadKey();
+                Console.Clear();
+
+                if (option.Key == ConsoleKey.Escape)
+                {
+                    EndGame();
+                }
+                else if (option.Key == ConsoleKey.Enter)
+                {
+                    return;
+                }
+                else
+                {
+                    Console.WriteLine("\n> Make sure you entered a valid key on your keyboard");
+                }
+            }
         }
 
         private static void StartGame()
@@ -48,13 +65,13 @@ namespace LincolnCardGame
             {
                 if (roundWinner == "computer")
                 {
-                    Console.WriteLine("\n=== Computer Will Go Draw Cards First ===");
+                    Console.WriteLine("=== Computer Will Go Draw Cards First ===");
                     comp2Cards = compPlayer.play2Cards();
                     human2Cards = humanPlayer.play2Cards();
                 }
                 else
                 {
-                    Console.WriteLine("\n=== You Will Draw Cards First ===");
+                    Console.WriteLine("=== You Will Draw Cards First ===");
                     human2Cards = humanPlayer.play2Cards();
                     comp2Cards = compPlayer.play2Cards();
                 }
@@ -76,7 +93,7 @@ namespace LincolnCardGame
                 {
                     pointsToWin += 1;
                     Console.WriteLine($"\n=== Both Player 1 And Player 2 Drew The Same Values Of Cards! ===" +
-                        "=== You Will Now Play Again To Win {pointsToWin} Points! ===");
+                        $"=== You Will Now Play Again To Win {pointsToWin} Points! ===");
                 }
             }
 
@@ -135,8 +152,8 @@ namespace LincolnCardGame
         // Gives an exit message and ends the program
         private static void EndGame()
         {
-            Console.WriteLine("\n== Thank You For Playing The Lincoln Card Game! ===" +
-                "(press any key to exit!)");
+            Console.WriteLine("\n== Thank You For Playing The Lincoln Card Game! ===\n" +
+                "\n\t(press any key to exit!)");
             Console.ReadKey();
             Environment.Exit(0);
         }

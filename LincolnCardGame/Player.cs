@@ -18,7 +18,7 @@ namespace LincolnCardGame
         public void PointWon(int points = 1)
         {
             Score += points;
-            Console.WriteLine($"\nPlayer {ID} has won the Round and a Point! their new score is {Score}\n");
+            Console.WriteLine($"\nPlayer {ID} has won the Round and {points} Point(s)! their new score is {Score}\n");
         }
 
         // Abstract method to be overridden by child classes

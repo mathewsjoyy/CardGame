@@ -22,7 +22,7 @@ namespace LincolnCardGame
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("Press any key to exit the game! and check your deck.");
                 Console.ReadKey();
-                Environment.Exit(0);
+                Environment.Exit(-1);
             }
         }
 
