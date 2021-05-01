@@ -4,6 +4,7 @@ namespace LincolnCardGame
 {
     internal class Computer : Player
     {
+        // Constructor which calls base (abstract class) constuctor
         public Computer(Deck deck) : base(deck)
         {
             ID = 2;
@@ -11,7 +12,7 @@ namespace LincolnCardGame
                 " I also have 10 cards in my hand!\n");
         }
 
-        // Computer picks 2 random cards to play each round
+        // Computer picks 2 random cards to play
         public override Tuple<Card, Card> play2Cards()
         {
             Random random = new Random();

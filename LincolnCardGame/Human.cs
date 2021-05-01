@@ -4,16 +4,18 @@ namespace LincolnCardGame
 {
     internal class Human : Player
     {
+        // Constructor which calls base (abstract class) constuctor
         public Human(Deck deck) : base(deck)
         {
             ID = 1;
             Console.WriteLine($"Welcome Human (PLAYER {ID}) you have 10 cards in your hand!");
         }
 
-        // Method to get player to draw 2 cards
+        // Asks player to select 2 cards they want to draw from a hand
         public override Tuple<Card, Card> play2Cards()
         {
-            Card card1; Card card2;
+            Card card1;
+            Card card2;
 
             while (true)
             {

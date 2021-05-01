@@ -6,45 +6,46 @@ namespace LincolnCardGame
     internal class Deck : IDisplayable
     {
         // Fields
-        public List<Card> Cards { get; private set; }
+        public List<Card> DeckOfCards { get; private set; }
 
         // Constructor
         public Deck()
         {
-            Cards = new List<Card>();
+            DeckOfCards = new List<Card>();
             CreateStandardDeck();
         }
 
         // Fill up the deck when a new object is instansiated
         private void CreateStandardDeck()
         {
-            List<string> suits = new List<string> { "Spades", "Hearts", "Diamonds", "Clubs" };
-            List<string> values = new List<string> { "2", "3", "4", "5", "6", "7", "8", "9",
-                                                     "10", "Jack", "Queen", "King", "Ace" };
+            List<string> suits = new List<string> { "Spades (♠)", "Hearts (♥)", "Diamonds (♦)", "Clubs (♣)" };
+            List<string> values = new List<string> {"2", "3", "4", "5", "6", "7", "8", "9",
+                                                     "10", "Jack", "Queen", "King", "Ace"};
             foreach (string suit in suits)
             {
                 foreach (string value in values)
                 {
-                    Cards.Add(new Card(suit, value));
+                    DeckOfCards.Add(new Card(suit, value));
                 }
             }
-            Console.WriteLine($"\nDeck of {Cards.Count} cards created (No Jokers).");
+            Console.WriteLine($"\nDeck of {DeckOfCards.Count} cards created (No Jokers).");
         }
 
+        // Shuffles the deck randomly
         public void Shuffle()
         {
-            Random rnd = new Random();
-            int count = Cards.Count;
+            Random random = new Random();
+            int count = DeckOfCards.Count;
 
             while (count > 1)
             {
                 count--;
-                int rng = rnd.Next(count);
-                var value = Cards[rng];
-                Cards[rng] = Cards[count];
-                Cards[count] = value;
+                int rng = random.Next(count);
+                var value = DeckOfCards[rng];
+                DeckOfCards[rng] = DeckOfCards[count];
+                DeckOfCards[count] = value;
             }
-            Console.WriteLine("The deck has been shuffled.\n");
+            Console.WriteLine("The deck has been shuffled!\n");
         }
 
         public Card Deal()
@@ -53,8 +54,8 @@ namespace LincolnCardGame
             if (IsEmpty() == false)
             {
                 // Get card at top and return it
-                Card topCard = Cards[Cards.Count - 1];
-                Cards.Remove(topCard);
+                Card topCard = DeckOfCards[DeckOfCards.Count - 1];
+                DeckOfCards.Remove(topCard);
                 return topCard;
             }
             return null;
@@ -62,15 +63,12 @@ namespace LincolnCardGame
 
         public bool IsEmpty()
         {
-            if (Cards.Count < 1)
-                return true;
-            else
-                return false;
+            return DeckOfCards.Count < 1;
         }
 
         public void Display()
         {
-            foreach (Card card in Cards) Console.WriteLine(card);
+            foreach (Card card in DeckOfCards) Console.WriteLine(card);
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace LincolnCardGame
 {
@@ -7,35 +6,33 @@ namespace LincolnCardGame
     {
         private static void Main(string[] args)
         {
+            // Call the methods to play the game
+            ShowInstructions();
             StartGame();
-            Console.ReadKey();
+            EndGame();
+        }
+
+        private static void ShowInstructions()
+        {
+            Console.WriteLine("---==== Welcome to the LINCOLN Card Game ====---");
+            Console.WriteLine("1. You will play against the computer, and both receive 10 cards." +
+                "\n2. Both players draw 2 cards,and player with highest total wins hand (and starts next round)" +
+                "\n3. If totals are the same, continue to next hand. Winning player gets both hands." +
+                "\n4. Player with highest number of hand wins, wins the game." +
+                "\n5. If the number of hand wins are the same, draw a random card from the remaining cards - highest wins." +
+                "\n6. If the final hands are the same value, draw a random card from the remaining cards highest wins the hand." +
+                "\n> (Look out for messages starting and ending with '===', these show the state of the game");
+
+            Console.WriteLine("\n> Press any key to start!");
+            Console.ReadKey(); Console.Clear();
         }
 
         private static void StartGame()
         {
-            Console.WriteLine("---==== Welcome to the LINCOLN Card Game ====---");
-            Console.WriteLine("> You will play against the computer, and both receive 10 cards." +
-                "\n> Both players draw 2 cards,and player with highest total wins hand (and starts next round)" +
-                "\n> If totals are the same, continue to next hand. Winning player gets both hands." +
-                "\n> Player with highest number of hand wins, wins the game." +
-                "\n> If the number of hand wins are the same, draw a random card from the remaining cards - highest wins." +
-                "\n> If the final hands are the same value, draw a random card from the remaining cards highest wins the hand." +
-                "\n> (Look out for messages starting and ending with '===', these show the state of the game");
-
             // Make a new deck and shuffle it
             Deck deck = new Deck();
             deck.Shuffle();
 
-            Console.WriteLine("> Press any key to start!");
-            Console.ReadKey(); Console.Clear();
-
-            // Begin the rounds of the game
-            PlayRounds(deck);
-        }
-
-
-        private static void PlayRounds(Deck deck)
-        {
             // Make objects of the 2 players for the game
             Human humanPlayer = new Human(deck);
             Computer compPlayer = new Computer(deck);
@@ -51,48 +48,97 @@ namespace LincolnCardGame
             {
                 if (roundWinner == "computer")
                 {
-                    Console.WriteLine("\n=== Computer will go draw cards first ===");
+                    Console.WriteLine("\n=== Computer Will Go Draw Cards First ===");
                     comp2Cards = compPlayer.play2Cards();
                     human2Cards = humanPlayer.play2Cards();
                 }
                 else
                 {
-                    Console.WriteLine("\n=== You will draw cards first ===");
+                    Console.WriteLine("\n=== You Will Draw Cards First ===");
                     human2Cards = humanPlayer.play2Cards();
                     comp2Cards = compPlayer.play2Cards();
                 }
-           
+
                 // Check which player has the higher cards point value added together
                 if (human2Cards.Item1 + human2Cards.Item2 > comp2Cards.Item1 + comp2Cards.Item2)
                 {
-                    humanPlayer.pointWon(pointsToWin);
+                    humanPlayer.PointWon(pointsToWin);
                     roundWinner = "human";
                     pointsToWin = 1;
                 }
                 else if (human2Cards.Item1 + human2Cards.Item2 < comp2Cards.Item1 + comp2Cards.Item2)
                 {
-                    compPlayer.pointWon(pointsToWin);
+                    compPlayer.PointWon(pointsToWin);
                     roundWinner = "computer";
                     pointsToWin = 1;
                 }
                 else
                 {
                     pointsToWin += 1;
-                    Console.WriteLine($"\n=== Both Player 1 and Player 2 drew the same values of cards! ===" +
-                        "=== You will now play again to win {pointsToWin} points! ===");
+                    Console.WriteLine($"\n=== Both Player 1 And Player 2 Drew The Same Values Of Cards! ===" +
+                        "=== You Will Now Play Again To Win {pointsToWin} Points! ===");
                 }
             }
 
-            Console.Clear();
-            Console.WriteLine("==== GAME OVER ====");
+            Console.WriteLine("\n==== GAME OVER ====");
 
-            if(humanPlayer.Score == compPlayer.Score)
+            humanPlayer.Display();
+            compPlayer.Display();
+
+            if (humanPlayer.Score == compPlayer.Score)
             {
-                humanPlayer.Display();
-                compPlayer.Display();
-                Console.WriteLine("\n=== Looks like a draw! Both players will draw a random card from the deck ===");
+                Console.WriteLine("\n=== Looks Like A Draw! ===");
+                TieBreaker(deck, humanPlayer, compPlayer);
             }
-            
+            else if (humanPlayer.Score > compPlayer.Score)
+            {
+                Console.WriteLine("\n=== Looks Like You Win, Good Job! ===");
+            }
+            else
+            {
+                Console.WriteLine("\n=== Looks Like The Computer Wins, Better Luck Next Time! ===");
+            }
+        }
+
+        private static void TieBreaker(Deck deck, Player humanPlayer, Player compPlayer)
+        {
+            Console.WriteLine("=== Both Players Will Draw A Random Card From The Deck To Find A Winner ===");
+
+            bool winnerFound = false;
+            deck.Shuffle();
+
+            while (winnerFound == false && deck.IsEmpty() == false)
+            {
+                Card compCard = deck.Deal();
+                Console.WriteLine($"\n=== Computer Has Taken A Random Card And Got {compCard} ===");
+                Console.WriteLine("\n=== Press Any Key To Now Draw A Random Card ===");
+                Card humanCard = deck.Deal();
+                Console.WriteLine($"\n=== You Have Taken A Random Card And Got {humanCard} ===");
+
+                if (compCard.pointValue > humanCard.pointValue)
+                {
+                    Console.WriteLine("\n=== Looks Like The Computer Wins, Better Luck Next Time! ===");
+                    winnerFound = true;
+                }
+                else if (compCard.pointValue < humanCard.pointValue)
+                {
+                    Console.WriteLine("\n=== Looks Like You Win, Good Job! ===");
+                    winnerFound = true;
+                }
+                else
+                {
+                    Console.WriteLine("\n=== Its A Draw! Lets Try Again ===");
+                }
+            }
+        }
+
+        // Gives an exit message and ends the program
+        private static void EndGame()
+        {
+            Console.WriteLine("\n== Thank You For Playing The Lincoln Card Game! ===" +
+                "(press any key to exit!)");
+            Console.ReadKey();
+            Environment.Exit(0);
         }
     }
 }

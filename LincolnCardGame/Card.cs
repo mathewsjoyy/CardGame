@@ -4,7 +4,6 @@
     {
         // Fields
         public string Suit { get; private set; }
-
         public string Value { get; private set; }
         public int pointValue { get; private set; }
 
@@ -17,10 +16,7 @@
             SetCardPointValue(value);
         }
 
-        // Override to string method to show values of card when printed
-        public override string ToString() => $"{Value} of {Suit}";
-
-        // Gets card point value and assigns it to the pointValue field
+        // Gets a cards point value and assigns it to the pointValue field
         private void SetCardPointValue(string value)
         {
             if (int.TryParse(value, out _))
@@ -52,5 +48,8 @@
 
         // Operator overloading to add 2 cards together by their point value
         public static int operator +(Card card1, Card card2) => card1.pointValue + card2.pointValue;
+
+        // Override to string method to show values of card when printed
+        public override string ToString() => $"{Value} of {Suit}";
     }
 }

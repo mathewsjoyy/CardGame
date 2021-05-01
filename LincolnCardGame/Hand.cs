@@ -5,6 +5,7 @@ namespace LincolnCardGame
 {
     internal class Hand : IDisplayable
     {
+        // Fields
         public List<Card> AHand { get; private set; }
 
         // Assigns 10 cards from deck
@@ -25,15 +26,10 @@ namespace LincolnCardGame
             }
         }
 
-        public void Display()
-        {
-            Console.WriteLine("\n=== Cards currently in your hand ===");
-            foreach (Card card in AHand) Console.WriteLine(card);
-        }
-
+        // Gets 10 cards from a given deck
         private void GetAHand(Deck deck)
         {
-            if (deck.Cards.Count < 10)
+            if (deck.DeckOfCards.Count < 10)
             {
                 throw new NotEnoughCardsInDeckException();
             }
@@ -42,6 +38,12 @@ namespace LincolnCardGame
             {
                 AHand.Add(deck.Deal());
             }
+        }
+
+        public void Display()
+        {
+            Console.WriteLine("\n=== Cards currently in your hand ===");
+            foreach (Card card in AHand) Console.WriteLine(card);
         }
     }
 }
