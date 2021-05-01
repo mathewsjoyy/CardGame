@@ -28,7 +28,7 @@ namespace LincolnCardGame
                     DeckOfCards.Add(new Card(suit, value));
                 }
             }
-            Console.WriteLine($"\nDeck of {DeckOfCards.Count} cards created (No Jokers).");
+            Console.WriteLine($"( Deck Of {DeckOfCards.Count} Cards Created (No Jokers) )");
         }
 
         // Shuffles the deck randomly
@@ -45,7 +45,7 @@ namespace LincolnCardGame
                 DeckOfCards[rng] = DeckOfCards[count];
                 DeckOfCards[count] = value;
             }
-            Console.WriteLine("The deck has been shuffled!\n");
+            Console.WriteLine("( The Deck Has Been Shuffled! )\n");
         }
 
         public Card Deal()

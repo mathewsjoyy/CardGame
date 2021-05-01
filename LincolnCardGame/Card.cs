@@ -4,6 +4,7 @@
     {
         // Fields
         public string Suit { get; private set; }
+
         public string Value { get; private set; }
         public int pointValue { get; private set; }
 

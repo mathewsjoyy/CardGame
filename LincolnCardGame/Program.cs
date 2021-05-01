@@ -14,6 +14,8 @@ namespace LincolnCardGame
 
         private static void ShowInstructions()
         {
+            GraphicalUserInterface.SetGUI(ConsoleColor.Green, ConsoleColor.Black, "Lincoln Card Game", true);
+
             Console.WriteLine("---==== Welcome to the LINCOLN Card Game ====---");
             Console.WriteLine("1. You will play against the computer, and both receive 10 cards." +
                 "\n2. Both players draw 2 cards,and player with highest total wins hand (and starts next round)" +
