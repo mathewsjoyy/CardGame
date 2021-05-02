@@ -6,7 +6,7 @@ namespace LincolnCardGame
     internal class Hand : IDisplayable
     {
         // Fields
-        public List<Card> AHand { get; private set; }
+        public List<Card> AHand { get; }
 
         // Creates a new hand and assigns 10 cards from deck
         public Hand(Deck deck)

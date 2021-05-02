@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace LincolnCardGame
 {
-    internal class Deck : IDisplayable
+    internal class Deck
     {
         // Fields
-        public List<Card> DeckOfCards { get; private set; }
+        public List<Card> DeckOfCards { get; }
 
         // Constructor
         public Deck()
@@ -15,7 +15,7 @@ namespace LincolnCardGame
             CreateStandardDeck();
         }
 
-        // Fill up the deck when a new object is instansiated
+        // Fill up the deck when a new object is instantiated
         private void CreateStandardDeck()
         {
             List<string> suits = new List<string> { "Spades (♠)", "Hearts (♥)", "Diamonds (♦)", "Clubs (♣)" };
@@ -50,27 +50,18 @@ namespace LincolnCardGame
 
         public Card Deal()
         {
-            // Mark sure the deck isnt empty
-            if (IsEmpty() == false)
-            {
-                // Get card at top and return it
-                Card topCard = DeckOfCards[DeckOfCards.Count - 1];
-                DeckOfCards.Remove(topCard);
-                return topCard;
-            }
-            return null;
+            // Mark sure the deck isn't empty
+            if (IsEmpty() == true) return null;
+            // Get card at top and return it
+            Card topCard = DeckOfCards[DeckOfCards.Count - 1];
+            DeckOfCards.Remove(topCard);
+            return topCard;
         }
 
         // Returns true or false depending on if deck is not empty
         public bool IsEmpty()
         {
             return DeckOfCards.Count < 1;
-        }
-
-        // Displays every card in the deck to the console
-        public void Display()
-        {
-            foreach (Card card in DeckOfCards) Console.WriteLine(card);
         }
     }
 }

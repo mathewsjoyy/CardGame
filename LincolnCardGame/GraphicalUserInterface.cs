@@ -4,8 +4,8 @@ namespace LincolnCardGame
 {
     internal class GraphicalUserInterface
     {
-        // Used to change the name,foreground and background colours of the console window
-        public static void SetGUI(ConsoleColor foreground, ConsoleColor background, string name, bool displayAscii)
+        // Used to change the name,foreground and background colors of the console window
+        public static void SetGui(ConsoleColor foreground, ConsoleColor background, string name, bool displayAscii)
         {
             // Check if ascii art is wanted
             if (displayAscii)
