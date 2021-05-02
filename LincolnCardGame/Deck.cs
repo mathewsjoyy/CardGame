@@ -61,11 +61,13 @@ namespace LincolnCardGame
             return null;
         }
 
+        // Returns true or false depending on if deck is not empty
         public bool IsEmpty()
         {
             return DeckOfCards.Count < 1;
         }
 
+        // Displays every card in the deck to the console
         public void Display()
         {
             foreach (Card card in DeckOfCards) Console.WriteLine(card);

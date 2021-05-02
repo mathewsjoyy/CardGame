@@ -8,7 +8,7 @@ namespace LincolnCardGame
         // Fields
         public List<Card> AHand { get; private set; }
 
-        // Assigns 10 cards from deck
+        // Creates a new hand and assigns 10 cards from deck
         public Hand(Deck deck)
         {
             AHand = new List<Card>();
@@ -20,7 +20,7 @@ namespace LincolnCardGame
             catch (NotEnoughCardsInDeckException ex)
             {
                 Console.WriteLine(ex.Message);
-                Console.WriteLine("Press any key to exit the game! and check your deck.");
+                Console.WriteLine("Press Any Key To Exit The Game! And Check Your Deck.");
                 Console.ReadKey();
                 Environment.Exit(-1);
             }
@@ -42,7 +42,7 @@ namespace LincolnCardGame
 
         public void Display()
         {
-            Console.WriteLine("\n=== Cards currently in your hand ===");
+            Console.WriteLine("\n=== Cards Currently In Your Hand ===");
             foreach (Card card in AHand) Console.WriteLine(card);
         }
     }

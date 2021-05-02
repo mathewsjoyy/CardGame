@@ -8,8 +8,8 @@ namespace LincolnCardGame
         public Computer(Deck deck) : base(deck)
         {
             ID = 2;
-            Console.WriteLine($"\nHello I'am Computer (PLAYER {ID}) who you will try beat!" +
-                " I also have 10 cards in my hand!\n");
+            Console.WriteLine($"\nHello I'am Computer (PLAYER {ID}) Who You Will Try Beat You!" +
+                " I Have 10 Cards In My Hand!\n");
         }
 
         // Computer picks 2 random cards to play
@@ -22,7 +22,7 @@ namespace LincolnCardGame
             Card card2 = playerHand.AHand[random.Next(playerHand.AHand.Count - 1)];
             playerHand.AHand.Remove(card2);
 
-            Console.WriteLine($"\n=== Computer has choosen to play {card1} and {card2} ===");
+            Console.WriteLine($"\n=== Computer Has Choosen To Play {card1} And {card2} ===");
             return Tuple.Create(card1, card2);
         }
     }

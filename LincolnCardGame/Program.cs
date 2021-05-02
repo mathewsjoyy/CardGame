@@ -14,6 +14,7 @@ namespace LincolnCardGame
 
         private static void ShowInstructions()
         {
+            // Set the console graphical layout
             GraphicalUserInterface.SetGUI(ConsoleColor.Green, ConsoleColor.Black, "Lincoln Card Game", true);
 
             Console.WriteLine("---==== Welcome to the LINCOLN Card Game ====---");
@@ -56,18 +57,19 @@ namespace LincolnCardGame
             Human humanPlayer = new Human(deck);
             Computer compPlayer = new Computer(deck);
 
+            // Variables to keep track of round winner and points to win per round
             string roundWinner = null;
             int pointsToWin = 1;
-
-            Tuple<Card, Card> human2Cards = null;
-            Tuple<Card, Card> comp2Cards = null;
 
             // Keep playing while players still have cards in their hands
             while (humanPlayer.playerHand.AHand.Count > 1 && compPlayer.playerHand.AHand.Count > 1)
             {
+                Tuple<Card, Card> human2Cards;
+                Tuple<Card, Card> comp2Cards;
+
                 if (roundWinner == "computer")
                 {
-                    Console.WriteLine("=== Computer Will Go Draw Cards First ===");
+                    Console.WriteLine("=== Computer Will Draw Cards First ===");
                     comp2Cards = compPlayer.play2Cards();
                     human2Cards = humanPlayer.play2Cards();
                 }
@@ -101,6 +103,7 @@ namespace LincolnCardGame
 
             Console.WriteLine("\n==== GAME OVER ====");
 
+            // Display both players stats (scores / hands won)
             humanPlayer.Display();
             compPlayer.Display();
 
@@ -124,22 +127,32 @@ namespace LincolnCardGame
             Console.WriteLine("=== Both Players Will Draw A Random Card From The Deck To Find A Winner ===");
 
             bool winnerFound = false;
-            deck.Shuffle();
 
-            while (winnerFound == false && deck.IsEmpty() == false)
+            // Both players draw a card from the deck until a winner is found or deck is empty
+            while (!winnerFound)
             {
-                Card compCard = deck.Deal();
+                if (deck.IsEmpty())
+                {
+                    Console.Clear();
+                    Console.WriteLine("=== Looks Like The Deck Is Empty! No Winner Today... :( ===");
+                    EndGame();
+                }
+
+                Card compCard = compPlayer.DrawARandomCard(deck);
                 Console.WriteLine($"\n=== Computer Has Taken A Random Card And Got {compCard} ===");
+
                 Console.WriteLine("\n=== Press Any Key To Now Draw A Random Card ===");
-                Card humanCard = deck.Deal();
+                Console.ReadKey();
+
+                Card humanCard = humanPlayer.DrawARandomCard(deck);
                 Console.WriteLine($"\n=== You Have Taken A Random Card And Got {humanCard} ===");
 
-                if (compCard.pointValue > humanCard.pointValue)
+                if (compCard.PointValue > humanCard.PointValue)
                 {
                     Console.WriteLine("\n=== Looks Like The Computer Wins, Better Luck Next Time! ===");
                     winnerFound = true;
                 }
-                else if (compCard.pointValue < humanCard.pointValue)
+                else if (compCard.PointValue < humanCard.PointValue)
                 {
                     Console.WriteLine("\n=== Looks Like You Win, Good Job! ===");
                     winnerFound = true;
