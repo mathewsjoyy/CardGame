@@ -6,13 +6,13 @@ namespace LincolnCardGame
     {
         // Fields
         public int Score { get; private set; }
-
-        public int Id { get; protected set; }
-        public Hand PlayerHand { get; }
+        public int Id { get; private set; }
+        public Hand PlayerHand { get; private set; }
 
         // Constructor
-        protected Player(Deck deck)
+        protected Player(Deck deck, int ID)
         {
+            Id = ID;
             PlayerHand = new Hand(deck);
         }
 
@@ -20,7 +20,7 @@ namespace LincolnCardGame
         public void PointWon(int points = 1)
         {
             Score += points;
-            Console.WriteLine($"\nPlayer {Id} has won the Round and {points} Point(s)! their new score is {Score}\n");
+            Console.WriteLine($"\n=== Player {Id} Has Won The Round And {points} Point(s)! Their New Score Is {Score} ===\n");
         }
 
         // Abstract method to be overridden by child classes
@@ -36,7 +36,7 @@ namespace LincolnCardGame
         // Displays the player details
         public void Display()
         {
-            Console.WriteLine($"Player {Id} Details:\n>Player Score : {Score}");
+            Console.WriteLine($"Player {Id} Details:\n>Score : {Score}");
         }
     }
 }

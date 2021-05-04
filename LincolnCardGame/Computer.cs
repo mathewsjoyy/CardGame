@@ -5,10 +5,9 @@ namespace LincolnCardGame
     internal class Computer : Player
     {
         // Constructor which calls base (abstract class) constructor
-        public Computer(Deck deck) : base(deck)
+        public Computer(Deck deck, int ID) : base(deck, ID)
         {
-            Id = 2;
-            Console.WriteLine($"\nHello I'm Computer (PLAYER {Id}) Who You Will Try Beat You!" +
+            Console.WriteLine($"Hello I'm Computer (PLAYER {Id}) Who You Will Try Beat You!" +
                 " I Have 10 Cards In My Hand!\n");
         }
 
@@ -22,7 +21,6 @@ namespace LincolnCardGame
             Card card2 = PlayerHand.AHand[random.Next(PlayerHand.AHand.Count - 1)];
             PlayerHand.AHand.Remove(card2);
 
-            Console.WriteLine($"\n=== Computer Has Chosen To Play {card1} And {card2} ===");
             return Tuple.Create(card1, card2);
         }
     }

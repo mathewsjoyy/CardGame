@@ -51,7 +51,7 @@ namespace LincolnCardGame
         public Card Deal()
         {
             // Mark sure the deck isn't empty
-            if (IsEmpty() == true) return null;
+            if (IsEmpty()) return null;
             // Get card at top and return it
             Card topCard = DeckOfCards[DeckOfCards.Count - 1];
             DeckOfCards.Remove(topCard);

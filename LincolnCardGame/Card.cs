@@ -3,8 +3,8 @@
     internal class Card
     {
         // Fields
-        public string Suit { get; }
-        public string Value { get; }
+        public string Suit { get; private set; }
+        public string Value { get; private set; }
         public int PointValue { get; private set; }
 
         // Constructor

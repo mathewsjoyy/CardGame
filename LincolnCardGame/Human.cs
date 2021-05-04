@@ -5,9 +5,8 @@ namespace LincolnCardGame
     internal class Human : Player
     {
         // Constructor which calls base (Player class) constructor
-        public Human(Deck deck) : base(deck)
+        public Human(Deck deck, int ID) : base(deck, ID)
         {
-            Id = 1;
             Console.WriteLine($"Welcome Human (PLAYER {Id}) You Have 10 Cards In Your Hand!");
         }
 
@@ -19,7 +18,7 @@ namespace LincolnCardGame
                 try
                 {
                     PlayerHand.Display();
-                    Console.WriteLine("\nType The Number Of The Card You Want To Play \ne.g. Typing" +
+                    Console.WriteLine("\nType The Number Of The First Card You Want To Play \ne.g. Typing" +
                     $" '1' Would Play The Card At The Top Of The List Shown Above ({PlayerHand.AHand[1 - 1]}).");
                     int cardPosition1 = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("\nType The Number Of The Second Card You Want To Play \ne.g. typing" +
@@ -41,14 +40,12 @@ namespace LincolnCardGame
                     PlayerHand.AHand.Remove(chosenCard2);
 
                     Console.Clear();
-                    Console.WriteLine($"=== You Have Chosen To Play {chosenCard1} And {chosenCard2} ===");
-
                     return Tuple.Create(chosenCard1, chosenCard2);
                 }
                 catch (Exception)
                 {
                     Console.Clear();
-                    Console.WriteLine("=== Seems The Card You Want Isn't Available! Try Again\n ===");
+                    Console.WriteLine("=== Seems The Card You Want Isn't Available! Try Again ===");
                 }
             }
         }

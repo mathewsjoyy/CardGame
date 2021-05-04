@@ -9,7 +9,7 @@
 
             // Call the appropriate method to play the game
             newGame.ShowInstructions();
-            newGame.StartGame();
+            newGame.PlayGame();
             newGame.EndGame();
         }
     }
