@@ -17,7 +17,7 @@ namespace LincolnCardGame
             {
                 GetAHand(deck);
             }
-            catch (NotEnoughCardsInDeckException ex)
+            catch (NotEnoughCardsException ex)
             {
                 Console.WriteLine(ex.Message);
                 Console.WriteLine("Press Any Key To Exit The Game! And Check Your Deck.");
@@ -31,7 +31,7 @@ namespace LincolnCardGame
         {
             if (deck.DeckOfCards.Count < 10)
             {
-                throw new NotEnoughCardsInDeckException();
+                throw new NotEnoughCardsException();
             }
 
             for (int i = 0; i < 10; i++)

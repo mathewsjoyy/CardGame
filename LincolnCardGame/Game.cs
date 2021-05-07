@@ -24,9 +24,9 @@ namespace LincolnCardGame
             _player2 = new Computer(_deck, 2);
         }
 
+        // Display instructions for the user to know how the game actually works
         public void ShowInstructions()
         {
-            // Display instructions for the user to know how the game actually works
             Console.WriteLine("---==== Instructions For The LINCOLN Card Game ====---");
             Console.WriteLine("1. You will play against the computer, and both receive 10 cards." +
                 "\n2. Both players draw 2 cards,and player with highest total wins hand (and starts next round)" +
@@ -142,6 +142,7 @@ namespace LincolnCardGame
             }
         }
 
+        // Find play with highest score, if its a draw call for a tiebreaker
         private void FindWinner()
         {
             Console.WriteLine("\n==== GAME OVER ====");

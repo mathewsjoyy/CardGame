@@ -42,7 +42,7 @@ namespace LincolnCardGame
                     Console.Clear();
                     return Tuple.Create(chosenCard1, chosenCard2);
                 }
-                catch (Exception)
+                catch (IndexOutOfRangeException)
                 {
                     Console.Clear();
                     Console.WriteLine("=== Seems The Card You Want Isn't Available! Try Again ===");

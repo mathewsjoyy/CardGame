@@ -11,9 +11,15 @@ namespace LincolnCardGame
                 " I Have 10 Cards In My Hand!\n");
         }
 
-        // Computer picks 2 random cards to play
+        // Computer picks 2 random cards to play,removing them from the Hand
         public override Tuple<Card, Card> Play2Cards()
         {
+            if (PlayerHand.AHand.Count <= 1)
+            {
+                Console.WriteLine($"Not enough cards in Player {Id} Hand...");
+                return null;
+            }
+
             Random random = new Random();
 
             Card card1 = PlayerHand.AHand[random.Next(PlayerHand.AHand.Count - 1)];
