@@ -13,6 +13,7 @@ namespace LincolnCardGame
         // Asks player to select 2 cards they want to draw from a hand
         public override Tuple<Card, Card> Play2Cards()
         {
+            Console.WriteLine("\n=== Your Turn ===");
             while (true)
             {
                 try
@@ -42,10 +43,15 @@ namespace LincolnCardGame
                     Console.Clear();
                     return Tuple.Create(chosenCard1, chosenCard2);
                 }
-                catch (IndexOutOfRangeException)
+                catch (ArgumentOutOfRangeException)
                 {
                     Console.Clear();
-                    Console.WriteLine("=== Seems The Card You Want Isn't Available! Try Again ===");
+                    Console.WriteLine("=== Seems The Card You Want Isn't Available! Try Again ===\n");
+                }
+                catch (FormatException)
+                {
+                    Console.Clear();
+                    Console.WriteLine("=== That Isnt A Valid Input! Try Again ===\n");
                 }
             }
         }

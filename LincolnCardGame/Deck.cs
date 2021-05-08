@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LincolnCardGame
 {
-    internal class Deck
+    internal class Deck : IDisplayable
     {
         // Fields
         public List<Card> DeckOfCards { get; }
@@ -62,6 +62,14 @@ namespace LincolnCardGame
         public bool IsEmpty()
         {
             return DeckOfCards.Count < 1;
+        }
+
+        // Display cards currently in deck
+        public void Display()
+        {
+            Console.WriteLine("Cards currently in Deck : ");
+            foreach (Card card in DeckOfCards) Console.Write($"{card}, ");
+            Console.WriteLine();
         }
     }
 }

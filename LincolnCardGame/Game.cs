@@ -15,7 +15,7 @@ namespace LincolnCardGame
             // Set the console graphical layout
             GraphicalUserInterface.SetGui(ConsoleColor.Green, ConsoleColor.Black, "Lincoln Card Game", true);
 
-            // Make a new deck and shuffle it
+            // Make a new deck then shuffle it
             _deck = new Deck();
             _deck.Shuffle();
 
@@ -28,7 +28,7 @@ namespace LincolnCardGame
         public void ShowInstructions()
         {
             Console.WriteLine("---==== Instructions For The LINCOLN Card Game ====---");
-            Console.WriteLine("1. You will play against the computer, and both receive 10 cards." +
+            Console.WriteLine("1. You will play against the computer, and both have 10 cards." +
                 "\n2. Both players draw 2 cards,and player with highest total wins hand (and starts next round)" +
                 "\n3. If totals are the same, continue to next hand. Winning player gets both hands." +
                 "\n4. Player with highest number of hand wins, wins the game." +
@@ -36,7 +36,7 @@ namespace LincolnCardGame
                 "\n6. If the final hands are the same value, draw a random card from the remaining cards highest wins the hand." +
                 "\n> (When you draw your cards you will not be able to see the computers cards and vice versa," +
                 " until you both reveil)" +
-                "\n> (Look out for messages starting and ending with '===', these show the state of the game");
+                "\n> (Look out for messages starting and ending with '===', these show the state of the game)");
 
             Console.WriteLine("\n> Press Any Key To Continue...");
             Console.ReadKey(); Console.Clear();
@@ -208,13 +208,28 @@ namespace LincolnCardGame
             }
         }
 
-        // Gives an exit message and ends the program
+        // Takes user input to end program or restart
         public void EndGame()
         {
-            Console.WriteLine("\n=== Thank You For Playing The Lincoln Card Game! ===\n" +
-                "\n\t(press any key to exit!)");
-            Console.ReadKey();
-            Environment.Exit(0);
+            Console.WriteLine("\n=== Thank You For Playing The Lincoln Card Game! ===\n");
+
+            while (true)
+            {
+                Console.WriteLine("Type 'restart' To Replay The Game, Or 'end' To End The Game : ");
+                string option = Console.ReadLine().Trim().ToLower();
+
+                if (option == "end")
+                {
+                    Environment.Exit(0);
+                }
+                else if (option == "restart")
+                {
+                    Console.Clear();
+                    break;
+                }
+                Console.Clear();
+                Console.WriteLine("Invalid Input Try Again");
+            }
         }
     }
 }

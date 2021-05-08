@@ -42,7 +42,7 @@ namespace LincolnCardGame
 
         public void Display()
         {
-            Console.WriteLine("\n=== Cards Currently In Your Hand ===");
+            Console.WriteLine("=== Cards Currently In Your Hand ===");
             foreach (Card card in AHand) Console.WriteLine(card);
         }
     }
