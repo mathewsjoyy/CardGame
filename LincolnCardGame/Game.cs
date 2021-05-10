@@ -116,7 +116,7 @@ namespace LincolnCardGame
                         $"=== You Will Both Draw A Random Card From The Deck To Win {pointsToWin} points ===");
 
             // Logging game statistics
-            _Statistics += "Last Round Was A Draw, Both Players Both Players Drew Random Card To Find Winner\n";
+            _Statistics += "\nLast Round Was A Draw, Both Players Drew Random Card To Find Winner\n";
 
             while (true)
             {
@@ -178,11 +178,11 @@ namespace LincolnCardGame
             {
                 Console.WriteLine("\n=== Looks Like Player 1 Wins! unlucky player 2 :( ===");
                 // Logging game statistics
-                _Statistics += "Found Winner - Player1\n";
+                _Statistics += "\nFound Winner - Player1\n";
                 return;
             }
             // Logging game statistics
-            _Statistics += "Found Winner - Player2\n";
+            _Statistics += "\nFound Winner - Player2\n";
             Console.WriteLine("\n=== Looks Like Player 2 Wins!, unlucky player 1 :( ===");
         }
 
@@ -193,7 +193,7 @@ namespace LincolnCardGame
             Console.WriteLine("=== Both Players Will Draw A Random Card From The Deck To Find A Winner ===");
 
             // Logging game statistics
-            _Statistics += "Game Was A Draw, Both Player Drew Random Card\n";
+            _Statistics += "\nGame Was A Draw, Both Player Drew Random Card\n";
 
             // Both players draw a card from the deck until a winner is found or deck is empty
             while (true)
