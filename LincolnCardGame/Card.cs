@@ -12,37 +12,28 @@
         {
             Suit = suit;
             Value = value;
-
-            SetCardPointValue(value);
+            PointValue = SetCardPointValue(value);
         }
 
         // Gets a cards point value and assigns it to the pointValue field
-        private void SetCardPointValue(string value)
+        private int SetCardPointValue(string value)
         {
-            if (int.TryParse(value, out _))
+            switch (value)
             {
-                PointValue = int.Parse(value);
-            }
-            else
-            {
-                switch (value)
-                {
-                    case "Jack":
-                        PointValue = 11;
-                        break;
+                case "Jack":
+                    return 11;
 
-                    case "Queen":
-                        PointValue = 12;
-                        break;
+                case "Queen":
+                    return 12;
 
-                    case "King":
-                        PointValue = 13;
-                        break;
+                case "King":
+                    return 13;
 
-                    case "Ace":
-                        PointValue = 14;
-                        break;
-                }
+                case "Ace":
+                    return 14;
+
+                default:
+                    return int.Parse(value);
             }
         }
 

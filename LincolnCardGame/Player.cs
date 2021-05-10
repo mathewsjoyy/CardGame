@@ -10,9 +10,9 @@ namespace LincolnCardGame
         public Hand PlayerHand { get; private set; }
 
         // Constructor
-        protected Player(Deck deck, int ID)
+        protected Player(Deck deck, int id)
         {
-            Id = ID;
+            Id = id;
             PlayerHand = new Hand(deck);
         }
 

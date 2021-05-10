@@ -5,7 +5,7 @@ namespace LincolnCardGame
     internal class Human : Player
     {
         // Constructor which calls base (Player class) constructor
-        public Human(Deck deck, int ID) : base(deck, ID)
+        public Human(Deck deck, int id) : base(deck, id)
         {
             Console.WriteLine($"Welcome Human (PLAYER {Id}) You Have 10 Cards In Your Hand!");
         }

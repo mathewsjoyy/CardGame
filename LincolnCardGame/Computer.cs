@@ -5,7 +5,7 @@ namespace LincolnCardGame
     internal class Computer : Player
     {
         // Constructor which calls base (abstract class) constructor
-        public Computer(Deck deck, int ID) : base(deck, ID)
+        public Computer(Deck deck, int id) : base(deck, id)
         {
             Console.WriteLine($"Hello I'm Computer (PLAYER {Id}) Who You Will Try Beat You!" +
                 " I Have 10 Cards In My Hand!\n");
