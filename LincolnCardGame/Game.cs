@@ -124,27 +124,33 @@ namespace LincolnCardGame
                 {
                     Console.Clear();
                     Console.WriteLine("=== Looks Like The Deck Is Empty... This Last Round Will Not Count! ===");
+                    // Logging game statistics
+                    _Statistics += "Empty Deck - No Round Winner\n";
                     break;
                 }
 
-                Card compCard = _player2.DrawARandomCard(_deck);
-                Console.WriteLine($"\n=== Player 2 Has Taken A Random Card And Got {compCard} ===");
+                Card player2Card = _player2.DrawARandomCard(_deck);
+                Console.WriteLine($"\n=== Player 2 Has Taken A Random Card And Got {player2Card} ===");
 
                 Console.WriteLine("\n=== Press Any Key To Now Draw A Random Card ===");
                 Console.ReadKey();
 
-                Card humanCard = _player1.DrawARandomCard(_deck);
-                Console.WriteLine($"\n=== Player 1 Has Taken A Random Card And Got {humanCard} ===");
+                Card player1Card = _player1.DrawARandomCard(_deck);
+                Console.WriteLine($"\n=== Player 1 Has Taken A Random Card And Got {player1Card} ===");
 
-                if (compCard.PointValue > humanCard.PointValue)
+                if (player2Card.PointValue > player1Card.PointValue)
                 {
                     _player2.PointWon(pointsToWin);
+                    // Logging game statistics
+                    _Statistics += $"Player 2 Drew - {player2Card} And Won\n";
                     return;
                 }
 
-                if (compCard.PointValue < humanCard.PointValue)
+                if (player2Card.PointValue < player1Card.PointValue)
                 {
                     _player1.PointWon(pointsToWin);
+                    // Logging game statistics
+                    _Statistics += $"Player 1 Drew - {player1Card} And Won\n";
                     return;
                 }
 
@@ -196,27 +202,33 @@ namespace LincolnCardGame
                 {
                     Console.Clear();
                     Console.WriteLine("=== Looks Like The Deck Is Empty! No Winner Today... :( ===");
+                    // Logging game statistics
+                    _Statistics += "Empty Deck - No Round Winner\n";
                     break;
                 }
 
-                Card player2 = _player2.DrawARandomCard(_deck);
-                Console.WriteLine($"\n=== Player 2 Has Taken A Random Card And Got {player2} ===");
+                Card player2Card = _player2.DrawARandomCard(_deck);
+                Console.WriteLine($"\n=== Player 2 Has Taken A Random Card And Got {player2Card} ===");
 
                 Console.WriteLine("\n=== Press Any Key To Now Draw A Random Card ===");
                 Console.ReadKey();
 
-                Card player1 = _player1.DrawARandomCard(_deck);
-                Console.WriteLine($"\n=== You Have Taken A Random Card And Got {player1} ===");
+                Card player1Card = _player1.DrawARandomCard(_deck);
+                Console.WriteLine($"\n=== You Have Taken A Random Card And Got {player1Card} ===");
 
-                if (player2.PointValue > player1.PointValue)
+                if (player2Card.PointValue > player1Card.PointValue)
                 {
                     Console.WriteLine("\n=== Good Job Player 2 You Win! ===");
+                    // Logging game statistics
+                    _Statistics += $"Player 2 Drew - {player2Card} And Won\n";
                     return;
                 }
 
-                if (player2.PointValue < player1.PointValue)
+                if (player2Card.PointValue < player1Card.PointValue)
                 {
                     Console.WriteLine("\n=== Good Job Player 1 You Win! ===");
+                    // Logging game statistics
+                    _Statistics += $"Player 1 Drew - {player1Card} And Won\n";
                     return;
                 }
 
