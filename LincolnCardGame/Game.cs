@@ -2,13 +2,13 @@
 
 namespace LincolnCardGame
 {
-    internal class Game
+    internal class Game : ICardGame
     {
         // Private Fields
-        private Deck _deck;
-        private Player _player1;
-        private Player _player2;
-        private string _statistics;
+        public Deck Deck { get; private set; }
+        public Player Player1 { get; private set; }
+        public Player Player2 { get; private set; }
+        public string Statistics { get; private set; }
 
         // Constructor
         public Game()
@@ -17,12 +17,12 @@ namespace LincolnCardGame
             GraphicalUserInterface.SetGui(ConsoleColor.Green, ConsoleColor.Black, "Lincoln Card Game", true);
 
             // Make a new deck then shuffle it
-            _deck = new Deck();
-            _deck.Shuffle();
+            Deck = new Deck();
+            Deck.Shuffle();
 
             // Make objects of the 2 players for the game, and give both players a unique ID to keep track off
-            _player1 = new Human(_deck, 1);
-            _player2 = new Computer(_deck, 2);
+            Player1 = new Human(Deck, 1);
+            Player2 = new Computer(Deck, 2);
         }
 
         // Display instructions for the user to know how the game actually works
@@ -51,7 +51,7 @@ namespace LincolnCardGame
             int round = 1;
 
             // Keep playing while players still have cards in their hands
-            while (_player1.PlayerHand.AHand.Count > 0 && _player2.PlayerHand.AHand.Count > 0)
+            while (Player1.PlayerHand.AHand.Count > 0 && Player2.PlayerHand.AHand.Count > 0)
             {
                 Tuple<Card, Card> player1Cards;
                 Tuple<Card, Card> player2Cards;
@@ -60,18 +60,18 @@ namespace LincolnCardGame
                 if (roundWinner == "player2")
                 {
                     Console.WriteLine("=== Player 2 Has Chosen Cards First ===");
-                    player2Cards = _player2.Play2Cards();
-                    player1Cards = _player1.Play2Cards();
+                    player2Cards = Player2.Play2Cards();
+                    player1Cards = Player1.Play2Cards();
                 }
                 else
                 {
                     Console.WriteLine("=== Player 1 Will Choose Cards First ===");
-                    player1Cards = _player1.Play2Cards();
-                    player2Cards = _player2.Play2Cards();
+                    player1Cards = Player1.Play2Cards();
+                    player2Cards = Player2.Play2Cards();
                 }
 
                 // Logging Game Statistics
-                _statistics += $"Round {round} - Player 1 Drew {player1Cards.Item1} + {player1Cards.Item2} = {player1Cards.Item1 + player1Cards.Item2}" +
+                Statistics += $"Round {round} - Player 1 Drew {player1Cards.Item1} + {player1Cards.Item2} = {player1Cards.Item1 + player1Cards.Item2}" +
                     $"   - Player 2 Drew {player2Cards.Item1} + {player2Cards.Item2} = {player2Cards.Item1 + player2Cards.Item2}\n";
                 round++;
 
@@ -82,17 +82,17 @@ namespace LincolnCardGame
                 // Check which player has the higher cards point value added together
                 if (player1Cards.Item1 + player1Cards.Item2 > player2Cards.Item1 + player2Cards.Item2)
                 {
-                    _player1.PointWon(pointsToWin);
+                    Player1.PointWon(pointsToWin);
                     roundWinner = "player1";
                     pointsToWin = 1;
                 }
                 else if (player1Cards.Item1 + player1Cards.Item2 < player2Cards.Item1 + player2Cards.Item2)
                 {
-                    _player2.PointWon(pointsToWin);
+                    Player2.PointWon(pointsToWin);
                     roundWinner = "player2";
                     pointsToWin = 1;
                 }
-                else if (_player1.PlayerHand.AHand.Count < 1 && _player2.PlayerHand.AHand.Count < 1)
+                else if (Player1.PlayerHand.AHand.Count < 1 && Player2.PlayerHand.AHand.Count < 1)
                 {
                     pointsToWin += 1;
                     LastRoundDraw(pointsToWin);
@@ -116,41 +116,41 @@ namespace LincolnCardGame
                         $"=== You Will Both Draw A Random Card From The Deck To Win {pointsToWin} points ===");
 
             // Logging game statistics
-            _statistics += "\nLast Round Was A Draw, Both Players Drew Random Card To Find Winner\n";
+            Statistics += "\nLast Round Was A Draw, Both Players Drew Random Card To Find Winner\n";
 
             while (true)
             {
-                if (_deck.IsEmpty())
+                if (Deck.IsEmpty())
                 {
                     Console.Clear();
                     Console.WriteLine("=== Looks Like The Deck Is Empty... This Last Round Will Not Count! ===");
                     // Logging game statistics
-                    _statistics += "Empty Deck - No Round Winner\n";
+                    Statistics += "Empty Deck - No Round Winner\n";
                     break;
                 }
 
-                Card player2Card = _player2.DrawARandomCard(_deck);
+                Card player2Card = Player2.DrawARandomCard(Deck);
                 Console.WriteLine($"\n=== Player 2 Has Taken A Random Card And Got {player2Card} ===");
 
                 Console.WriteLine("\n=== Press Any Key To Now Draw A Random Card ===");
                 Console.ReadKey();
 
-                Card player1Card = _player1.DrawARandomCard(_deck);
+                Card player1Card = Player1.DrawARandomCard(Deck);
                 Console.WriteLine($"\n=== Player 1 Has Taken A Random Card And Got {player1Card} ===");
 
                 if (player2Card.PointValue > player1Card.PointValue)
                 {
-                    _player2.PointWon(pointsToWin);
+                    Player2.PointWon(pointsToWin);
                     // Logging game statistics
-                    _statistics += $"Player 2 Drew - {player2Card} And Won\n";
+                    Statistics += $"Player 2 Drew - {player2Card} And Won\n";
                     return;
                 }
 
                 if (player2Card.PointValue < player1Card.PointValue)
                 {
-                    _player1.PointWon(pointsToWin);
+                    Player1.PointWon(pointsToWin);
                     // Logging game statistics
-                    _statistics += $"Player 1 Drew - {player1Card} And Won\n";
+                    Statistics += $"Player 1 Drew - {player1Card} And Won\n";
                     return;
                 }
 
@@ -164,25 +164,25 @@ namespace LincolnCardGame
             Console.WriteLine("\n==== GAME OVER ====");
 
             // Display both players stats (scores / hands won)
-            _player1.Display();
-            _player2.Display();
+            Player1.Display();
+            Player2.Display();
 
-            if (_player1.Score == _player2.Score)
+            if (Player1.Score == Player2.Score)
             {
                 Console.WriteLine("\n=== Looks Like A Draw! Time For A Tie Breaker ===");
                 FinalTieBreaker();
                 return;
             }
 
-            if (_player1.Score > _player2.Score)
+            if (Player1.Score > Player2.Score)
             {
                 Console.WriteLine("\n=== Looks Like Player 1 Wins! unlucky player 2 :( ===");
                 // Logging game statistics
-                _statistics += "\nFound Winner - Player1\n";
+                Statistics += "\nFound Winner - Player1\n";
                 return;
             }
             // Logging game statistics
-            _statistics += "\nFound Winner - Player2\n";
+            Statistics += "\nFound Winner - Player2\n";
             Console.WriteLine("\n=== Looks Like Player 2 Wins!, unlucky player 1 :( ===");
         }
 
@@ -193,34 +193,34 @@ namespace LincolnCardGame
             Console.WriteLine("=== Both Players Will Draw A Random Card From The Deck To Find A Winner ===");
 
             // Logging game statistics
-            _statistics += "\nGame Was A Draw, Both Player Drew Random Card\n";
+            Statistics += "\nGame Was A Draw, Both Player Drew Random Card\n";
 
             // Both players draw a card from the deck until a winner is found or deck is empty
             while (true)
             {
-                if (_deck.IsEmpty())
+                if (Deck.IsEmpty())
                 {
                     Console.Clear();
                     Console.WriteLine("=== Looks Like The Deck Is Empty! No Winner Today... :( ===");
                     // Logging game statistics
-                    _statistics += "Empty Deck - No Round Winner\n";
+                    Statistics += "Empty Deck - No Round Winner\n";
                     break;
                 }
 
-                Card player2Card = _player2.DrawARandomCard(_deck);
+                Card player2Card = Player2.DrawARandomCard(Deck);
                 Console.WriteLine($"\n=== Player 2 Has Taken A Random Card And Got {player2Card} ===");
 
                 Console.WriteLine("\n=== Press Any Key To Now Draw A Random Card ===");
                 Console.ReadKey();
 
-                Card player1Card = _player1.DrawARandomCard(_deck);
+                Card player1Card = Player1.DrawARandomCard(Deck);
                 Console.WriteLine($"\n=== You Have Taken A Random Card And Got {player1Card} ===");
 
                 if (player2Card.PointValue > player1Card.PointValue)
                 {
                     Console.WriteLine("\n=== Good Job Player 2 You Win! ===");
                     // Logging game statistics
-                    _statistics += $"Player 2 Drew - {player2Card} And Won\n";
+                    Statistics += $"Player 2 Drew - {player2Card} And Won\n";
                     return;
                 }
 
@@ -228,7 +228,7 @@ namespace LincolnCardGame
                 {
                     Console.WriteLine("\n=== Good Job Player 1 You Win! ===");
                     // Logging game statistics
-                    _statistics += $"Player 1 Drew - {player1Card} And Won\n";
+                    Statistics += $"Player 1 Drew - {player1Card} And Won\n";
                     return;
                 }
 
@@ -241,7 +241,7 @@ namespace LincolnCardGame
         {
             Console.WriteLine("\n=== Thank You For Playing The Lincoln Card Game! ===\n");
 
-            Console.WriteLine($"Overview Of Game Statistics : \n{_statistics}");
+            Console.WriteLine($"Overview Of Game Statistics : \n{Statistics}");
 
             while (true)
             {

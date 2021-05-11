@@ -1,6 +1,6 @@
 ﻿namespace LincolnCardGame
 {
-    // All class that inherit this interface must have display method
+    // All classes that inherit this interface must have display method
     internal interface IDisplayable
     {
         void Display();

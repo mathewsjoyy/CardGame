@@ -50,6 +50,7 @@
     <Compile Include="GraphicalUserInterface.cs" />
     <Compile Include="Hand.cs" />
     <Compile Include="Human.cs" />
+    <Compile Include="ICardGame.cs" />
     <Compile Include="IDisplayable.cs" />
     <Compile Include="NotEnoughCardsException.cs" />
     <Compile Include="Player.cs" />
