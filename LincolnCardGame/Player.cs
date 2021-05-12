@@ -34,9 +34,6 @@ namespace LincolnCardGame
         }
 
         // Displays the player details
-        public void Display()
-        {
-            Console.WriteLine($"Player {Id} Details:\n>Score : {Score}");
-        }
+        public void Display() => Console.WriteLine($"Player {Id} Details:\n>Score : {Score}");
     }
 }

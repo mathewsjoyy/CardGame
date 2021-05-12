@@ -43,7 +43,10 @@ namespace LincolnCardGame
         public void Display()
         {
             Console.WriteLine("=== Cards Currently In Your Hand ===");
-            foreach (Card card in AHand) Console.WriteLine(card);
+            AHand.ForEach(card => Console.WriteLine(card));
         }
+
+        // Returns true or false depending on if hand is empty
+        public bool IsEmpty() => AHand.Count < 1;
     }
 }

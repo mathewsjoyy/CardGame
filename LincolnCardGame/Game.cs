@@ -51,7 +51,7 @@ namespace LincolnCardGame
             int round = 1;
 
             // Keep playing while players still have cards in their hands
-            while (Player1.PlayerHand.AHand.Count > 0 && Player2.PlayerHand.AHand.Count > 0)
+            while (!Player1.PlayerHand.IsEmpty() && !Player2.PlayerHand.IsEmpty())
             {
                 Tuple<Card, Card> player1Cards;
                 Tuple<Card, Card> player2Cards;

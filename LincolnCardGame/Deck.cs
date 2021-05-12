@@ -58,17 +58,14 @@ namespace LincolnCardGame
             return topCard;
         }
 
-        // Returns true or false depending on if deck is not empty
-        public bool IsEmpty()
-        {
-            return DeckOfCards.Count < 1;
-        }
+        // Returns true or false depending on if deck is empty
+        public bool IsEmpty() => DeckOfCards.Count < 1;
 
         // Display cards currently in deck
         public void Display()
         {
             Console.WriteLine("Cards currently in Deck : ");
-            foreach (Card card in DeckOfCards) Console.Write($"{card}, ");
+            DeckOfCards.ForEach(card => Console.Write($"{card}, "));
             Console.WriteLine();
         }
     }

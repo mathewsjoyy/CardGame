@@ -5,7 +5,7 @@ namespace LincolnCardGame
     internal class Human : Player
     {
         // Constructor which calls base (Player class) constructor
-        public Human(Deck deck, int id) : base(deck, id)
+        public Human(Deck deck, int id = 1) : base(deck, id)
         {
             Console.WriteLine($"Welcome Human (PLAYER {Id}) You Have 10 Cards In Your Hand!");
         }
@@ -13,6 +13,12 @@ namespace LincolnCardGame
         // Asks player to select 2 cards they want to draw from a hand
         public override Tuple<Card, Card> Play2Cards()
         {
+            if (PlayerHand.IsEmpty())
+            {
+                Console.WriteLine($"Not enough cards in Player {Id} Hand...");
+                return null;
+            }
+
             Console.WriteLine("\n=== Your Turn ===");
             while (true)
             {

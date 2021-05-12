@@ -6,7 +6,6 @@
         Deck Deck { get; }
         Player Player1 { get; }
         Player Player2 { get; }
-        string Statistics { get; }
 
         void ShowInstructions();
         void PlayGame();
