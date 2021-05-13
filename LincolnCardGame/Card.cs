@@ -48,7 +48,7 @@ namespace LincolnCardGame
         // Checks if two types of card are the same
         public bool Equals(Card other)
         {
-            return Suit == other.Suit && Value == other.Value;
+            return other != null && Suit == other.Suit && Value == other.Value;
         }
     }
 }

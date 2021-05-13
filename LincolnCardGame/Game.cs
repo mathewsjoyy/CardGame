@@ -5,33 +5,32 @@ namespace LincolnCardGame
 {
     internal class Game : ICardGame
     {
-        // Private Fields
+        // Fields
         public Deck Deck { get; private set; }
         public Player Player1 { get; private set; }
         public Player Player2 { get; private set; }
-        public string GameLog { get; private set; }
+        public LogFile log { get; private set; } = new LogFile();
 
         // Constructor
         public Game()
         {
-            // Set the console graphical layout
-            GraphicalUserInterface.SetGui(ConsoleColor.Green, ConsoleColor.Black, "Lincoln Card Game");
-
             // Make a new deck then shuffle it
             Deck = new Deck();
             Deck.Shuffle();
 
-            // Checks the deck used doesnt contain any 2 of the same cards, if it does end game
+            // Checks the deck used doesn't contain any 2 of the same cards, if it does end game
             if (Deck.IsDeckUnique())
             {
-                Console.WriteLine($"\n=== Game Error Occurred! ===\nMessage : Deck contains 2 of the same card");
+                Console.WriteLine("\n=== Game Error Occurred! ===\nMessage : Deck contains 2 of the same card");
                 Console.WriteLine("\n=== Game Will End In 8 Seconds ===");
                 Thread.Sleep(8000); Environment.Exit(-1);
             }
 
             // Make objects of the 2 players for the game, and give both players a unique ID to keep track off
-            Player1 = new Human(Deck, 1);
-            Player2 = new Computer(Deck, 2);
+            Player1 = new Human(Deck);
+            Player2 = new Computer(Deck);
+
+            log.AddLogMessage("Deck made (and shuffled), Player 1 and Player 2 made");
         }
 
         // Display instructions for the user about the lincoln card game
@@ -51,7 +50,7 @@ namespace LincolnCardGame
                 "\n5. If the number of hand wins are the same, draw a random card from the remaining cards - highest wins." +
                 "\n6. If the final hands are the same value, draw a random card from the remaining cards highest wins the hand." +
                 "\n> (When you draw your cards you will not be able to see the computers cards and vice versa," +
-                " until you both reveil)" +
+                " until you both re-veil)" +
                 "\n> (Look out for messages starting and ending with '===', these show the state of the game)");
 
             Console.WriteLine("\n> Press Any Key To Continue...");
@@ -85,9 +84,8 @@ namespace LincolnCardGame
                     player2Cards = Player2.Play2Cards();
                 }
 
-                // Logging Game Statistics
-                GameLog += $"Round {round} - Player 1 Drew {player1Cards.Item1} + {player1Cards.Item2} = {player1Cards.Item1 + player1Cards.Item2}" +
-                    $"   - Player 2 Drew {player2Cards.Item1} + {player2Cards.Item2} = {player2Cards.Item1 + player2Cards.Item2}\n";
+                log.AddLogMessage($"Round {round} - Player 1 Drew {player1Cards.Item1} + {player1Cards.Item2} = {player1Cards.Item1 + player1Cards.Item2}" +
+                    $"\t- Player 2 Drew {player2Cards.Item1} + {player2Cards.Item2} = {player2Cards.Item1 + player2Cards.Item2}");
                 round++;
 
                 Console.WriteLine($"=== Player 2 Has Chosen To Play {player2Cards.Item1} And {player2Cards.Item2} ===");
@@ -131,7 +129,7 @@ namespace LincolnCardGame
                         $"=== You Will Both Draw A Random Card From The Deck To Win {pointsToWin} points ===");
 
             // Logging game statistics
-            GameLog += "\nLast Round Was A Draw, Both Players Drew Random Card To Find Winner\n";
+            log.AddLogMessage("Last Round Was A Draw, Both Players Drew Random Card To Find Winner");
 
             while (true)
             {
@@ -139,8 +137,7 @@ namespace LincolnCardGame
                 {
                     Console.Clear();
                     Console.WriteLine("=== Looks Like The Deck Is Empty... This Last Round Will Not Count! ===");
-                    // Logging game statistics
-                    GameLog += "Empty Deck - No Round Winner\n";
+                    log.AddLogMessage("Empty Deck - No Round Winner\n");
                     break;
                 }
 
@@ -156,16 +153,14 @@ namespace LincolnCardGame
                 if (player2Card.PointValue > player1Card.PointValue)
                 {
                     Player2.PointWon(pointsToWin);
-                    // Logging game statistics
-                    GameLog += $"Player 2 Drew - {player2Card} And Won\n";
+                    log.AddLogMessage($"Player 2 Drew - {player2Card} And Won\n");
                     return;
                 }
 
                 if (player2Card.PointValue < player1Card.PointValue)
                 {
                     Player1.PointWon(pointsToWin);
-                    // Logging game statistics
-                    GameLog += $"Player 1 Drew - {player1Card} And Won\n";
+                    log.AddLogMessage($"Player 1 Drew - {player1Card} And Won\n");
                     return;
                 }
 
@@ -192,12 +187,10 @@ namespace LincolnCardGame
             if (Player1.Score > Player2.Score)
             {
                 Console.WriteLine("\n=== Looks Like Player 1 Wins! unlucky player 2 :( ===");
-                // Logging game statistics
-                GameLog += "\nFound Winner - Player1\n";
+                log.AddLogMessage("Found Winner - Player1");
                 return;
             }
-            // Logging game statistics
-            GameLog += "\nFound Winner - Player2\n";
+            log.AddLogMessage("Found Winner - Player2");
             Console.WriteLine("\n=== Looks Like Player 2 Wins!, unlucky player 1 :( ===");
         }
 
@@ -207,8 +200,7 @@ namespace LincolnCardGame
         {
             Console.WriteLine("=== Both Players Will Draw A Random Card From The Deck To Find A Winner ===");
 
-            // Logging game statistics
-            GameLog += "\nGame Was A Draw, Both Player Drew Random Card\n";
+            log.AddLogMessage("Game Was A Draw, Both Player Drew Random Card");
 
             // Both players draw a card from the deck until a winner is found or deck is empty
             while (true)
@@ -217,8 +209,7 @@ namespace LincolnCardGame
                 {
                     Console.Clear();
                     Console.WriteLine("=== Looks Like The Deck Is Empty! No Winner Today... :( ===");
-                    // Logging game statistics
-                    GameLog += "Empty Deck - No Round Winner\n";
+                    log.AddLogMessage("Empty Deck - No Round Winner");
                     break;
                 }
 
@@ -234,16 +225,14 @@ namespace LincolnCardGame
                 if (player2Card.PointValue > player1Card.PointValue)
                 {
                     Console.WriteLine("\n=== Good Job Player 2 You Win! ===");
-                    // Logging game statistics
-                    GameLog += $"Player 2 Drew - {player2Card} And Won\n";
+                    log.AddLogMessage($"Player 2 Drew - {player2Card} And Won");
                     return;
                 }
 
                 if (player2Card.PointValue < player1Card.PointValue)
                 {
                     Console.WriteLine("\n=== Good Job Player 1 You Win! ===");
-                    // Logging game statistics
-                    GameLog += $"Player 1 Drew - {player1Card} And Won\n";
+                    log.AddLogMessage($"Player 1 Drew - {player1Card} And Won");
                     return;
                 }
 
@@ -256,12 +245,12 @@ namespace LincolnCardGame
         {
             Console.WriteLine("\n=== Thank You For Playing The Lincoln Card Game! ===\n");
 
-            Console.WriteLine($"Overview Of Game Statistics : \n{GameLog}");
+            Console.WriteLine($"Overview Of Game Log : \n{log.ReturnLogFileContent()}");
 
             while (true)
             {
                 Console.WriteLine("Type 'restart' To Replay The Game, Or 'end' To End The Game : ");
-                string option = Console.ReadLine().Trim().ToLower();
+                string option = Console.ReadLine()?.Trim().ToLower();
 
                 if (option == "end")
                 {

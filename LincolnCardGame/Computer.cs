@@ -11,7 +11,7 @@ namespace LincolnCardGame
                 " I Have 10 Cards In My Hand!\n");
         }
 
-        // Computer picks 2 random cards to play,removing them from the Hand
+        // Computer picks 2 highest value cards to play then removing them from the Hand
         public override Tuple<Card, Card> Play2Cards()
         {
             if (PlayerHand.IsEmpty())
@@ -20,11 +20,10 @@ namespace LincolnCardGame
                 return null;
             }
 
-            Random random = new Random();
-
-            Card card1 = PlayerHand.AHand[random.Next(PlayerHand.AHand.Count - 1)];
+            PlayerHand.SortHand();
+            Card card1 = PlayerHand.AHand[0];
             PlayerHand.AHand.Remove(card1);
-            Card card2 = PlayerHand.AHand[random.Next(PlayerHand.AHand.Count - 1)];
+            Card card2 = PlayerHand.AHand[0];
             PlayerHand.AHand.Remove(card2);
 
             return Tuple.Create(card1, card2);

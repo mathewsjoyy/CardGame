@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace LincolnCardGame
 {
-    internal class Deck : IDisplayable
+    internal class Deck
     {
         // Fields
-        public List<Card> DeckOfCards { get; }
+        public List<Card> DeckOfCards { get; private set; }
 
         // Constructor
         public Deck()
@@ -60,14 +60,6 @@ namespace LincolnCardGame
 
         // Returns true or false depending on if deck is empty
         public bool IsEmpty() => DeckOfCards.Count < 1;
-
-        // Display cards currently in deck
-        public void Display()
-        {
-            Console.WriteLine("Cards currently in Deck : ");
-            DeckOfCards.ForEach(card => Console.Write($"{card}, "));
-            Console.WriteLine();
-        }
 
         // Checks if the current deck is unique in cards (doesn't contain 2 of the same cards)
         public bool IsDeckUnique()

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace LincolnCardGame
 {
-    internal class Hand : IDisplayable
+    internal class Hand
     {
         // Fields
         public List<Card> AHand { get; private set; }
@@ -49,5 +50,11 @@ namespace LincolnCardGame
 
         // Returns true or false depending on if hand is empty
         public bool IsEmpty() => AHand.Count < 1;
+
+        // Sorts hand by its point value
+        public void SortHand()
+        {
+            AHand = AHand.OrderByDescending(card => card.PointValue).ToList();
+        }
     }
 }

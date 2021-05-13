@@ -2,11 +2,11 @@
 
 namespace LincolnCardGame
 {
-    internal abstract class Player : IDisplayable
+    internal abstract class Player
     {
         // Fields
         public int Score { get; private set; }
-        public int Id { get; private set; }
+        public int Id { get; private set; } = 0;
         public Hand PlayerHand { get; private set; }
 
         // Constructor

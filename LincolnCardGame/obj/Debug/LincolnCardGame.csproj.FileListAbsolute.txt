@@ -5,3 +5,10 @@ C:\Users\mathe\OneDrive\Documents\All_Assignments\Assignment3OOP\LincolnCardGame
 C:\Users\mathe\OneDrive\Documents\All_Assignments\Assignment3OOP\LincolnCardGame\LincolnCardGame\obj\Debug\LincolnCardGame.csproj.CoreCompileInputs.cache
 C:\Users\mathe\OneDrive\Documents\All_Assignments\Assignment3OOP\LincolnCardGame\LincolnCardGame\obj\Debug\LincolnCardGame.exe
 C:\Users\mathe\OneDrive\Documents\All_Assignments\Assignment3OOP\LincolnCardGame\LincolnCardGame\obj\Debug\LincolnCardGame.pdb
+C:\Users\mathe\OneDrive\Documents\All_Assignments\Assignment3OOP-TEST\LincolnCardGame\LincolnCardGame\obj\Debug\LincolnCardGame.csprojAssemblyReference.cache
+C:\Users\mathe\OneDrive\Documents\All_Assignments\Assignment3OOP-TEST\LincolnCardGame\LincolnCardGame\obj\Debug\LincolnCardGame.csproj.CoreCompileInputs.cache
+C:\Users\mathe\OneDrive\Documents\All_Assignments\Assignment3OOP-TEST\LincolnCardGame\LincolnCardGame\obj\Debug\LincolnCardGame.exe
+C:\Users\mathe\OneDrive\Documents\All_Assignments\Assignment3OOP-TEST\LincolnCardGame\LincolnCardGame\obj\Debug\LincolnCardGame.pdb
+C:\Users\mathe\OneDrive\Documents\All_Assignments\Assignment3OOP-TEST\LincolnCardGame\LincolnCardGame\bin\Debug\LincolnCardGame.exe.config
+C:\Users\mathe\OneDrive\Documents\All_Assignments\Assignment3OOP-TEST\LincolnCardGame\LincolnCardGame\bin\Debug\LincolnCardGame.exe
+C:\Users\mathe\OneDrive\Documents\All_Assignments\Assignment3OOP-TEST\LincolnCardGame\LincolnCardGame\bin\Debug\LincolnCardGame.pdb

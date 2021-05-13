@@ -56,7 +56,7 @@ namespace LincolnCardGame
                 catch (FormatException)
                 {
                     Console.Clear();
-                    Console.WriteLine("=== That Isnt A Valid Input! Try Again ===\n");
+                    Console.WriteLine("=== That Isn't A Valid Input! Try Again ===\n");
                 }
             }
         }
