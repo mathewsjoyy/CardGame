@@ -68,5 +68,21 @@ namespace LincolnCardGame
             DeckOfCards.ForEach(card => Console.Write($"{card}, "));
             Console.WriteLine();
         }
+
+        // Checks if the current deck is unique in cards (doesn't contain 2 of the same cards)
+        public bool IsDeckUnique()
+        {
+            foreach (Card card1 in DeckOfCards)
+            {
+                foreach (Card card2 in DeckOfCards)
+                {
+                    if (card1.Equals(card2))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
     }
 }

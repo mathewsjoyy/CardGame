@@ -19,7 +19,6 @@ namespace LincolnCardGame
                 return null;
             }
 
-            Console.WriteLine("\n=== Your Turn ===");
             while (true)
             {
                 try
@@ -29,7 +28,7 @@ namespace LincolnCardGame
                     $" '1' Would Play The Card At The Top Of The List Shown Above ({PlayerHand.AHand[1 - 1]}).");
                     int cardPosition1 = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("\nType The Number Of The Second Card You Want To Play \ne.g. typing" +
-                    $"'2' Would Play The Card Second From The Top Of The List Shown Above ({PlayerHand.AHand[2 - 1]}).");
+                    $" '2' Would Play The Card Second From The Top Of The List Shown Above ({PlayerHand.AHand[2 - 1]}).");
                     int cardPosition2 = Convert.ToInt32(Console.ReadLine());
 
                     // Check they haven't chosen the same card twice

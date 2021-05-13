@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 
 namespace LincolnCardGame
 {
@@ -8,26 +9,40 @@ namespace LincolnCardGame
         public Deck Deck { get; private set; }
         public Player Player1 { get; private set; }
         public Player Player2 { get; private set; }
-        public string Statistics { get; private set; }
+        public string GameLog { get; private set; }
 
         // Constructor
         public Game()
         {
             // Set the console graphical layout
-            GraphicalUserInterface.SetGui(ConsoleColor.Green, ConsoleColor.Black, "Lincoln Card Game", true);
+            GraphicalUserInterface.SetGui(ConsoleColor.Green, ConsoleColor.Black, "Lincoln Card Game");
 
             // Make a new deck then shuffle it
             Deck = new Deck();
             Deck.Shuffle();
+
+            // Checks the deck used doesnt contain any 2 of the same cards, if it does end game
+            if (Deck.IsDeckUnique())
+            {
+                Console.WriteLine($"\n=== Game Error Occurred! ===\nMessage : Deck contains 2 of the same card");
+                Console.WriteLine("\n=== Game Will End In 8 Seconds ===");
+                Thread.Sleep(8000); Environment.Exit(-1);
+            }
 
             // Make objects of the 2 players for the game, and give both players a unique ID to keep track off
             Player1 = new Human(Deck, 1);
             Player2 = new Computer(Deck, 2);
         }
 
-        // Display instructions for the user to know how the game actually works
+        // Display instructions for the user about the lincoln card game
         public void ShowInstructions()
         {
+            Console.WriteLine("" +
+                 " _    _             _         ___             _    ___                \n" +
+                 "| |  (_)_ _  __ ___| |_ _    / __|__ _ _ _ __| |  / __|__ _ _ __  ___ \n" +
+                @"| |__| | ' \/ _/ _ \ | ' \  | (__/ _` | '_/ _` | | (_ / _` | '  \/ -_)" + "\n" +
+                @"|____|_|_||_\__\___/_|_||_|  \___\__,_|_| \__,_|  \___\__,_|_|_|_\___|" + "\n");
+
             Console.WriteLine("---==== Instructions For The LINCOLN Card Game ====---");
             Console.WriteLine("1. You will play against the computer, and both have 10 cards." +
                 "\n2. Both players draw 2 cards,and player with highest total wins hand (and starts next round)" +
@@ -59,24 +74,24 @@ namespace LincolnCardGame
                 // Check who won the previous round and let that player go first
                 if (roundWinner == "player2")
                 {
-                    Console.WriteLine("=== Player 2 Has Chosen Cards First ===");
+                    Console.WriteLine($"=== Round {round} - Player 2 Has Chosen Cards First ===\n");
                     player2Cards = Player2.Play2Cards();
                     player1Cards = Player1.Play2Cards();
                 }
                 else
                 {
-                    Console.WriteLine("=== Player 1 Will Choose Cards First ===");
+                    Console.WriteLine($"=== Round {round} - Player 1 Will Choose Cards First ===\n");
                     player1Cards = Player1.Play2Cards();
                     player2Cards = Player2.Play2Cards();
                 }
 
                 // Logging Game Statistics
-                Statistics += $"Round {round} - Player 1 Drew {player1Cards.Item1} + {player1Cards.Item2} = {player1Cards.Item1 + player1Cards.Item2}" +
+                GameLog += $"Round {round} - Player 1 Drew {player1Cards.Item1} + {player1Cards.Item2} = {player1Cards.Item1 + player1Cards.Item2}" +
                     $"   - Player 2 Drew {player2Cards.Item1} + {player2Cards.Item2} = {player2Cards.Item1 + player2Cards.Item2}\n";
                 round++;
 
-                Console.WriteLine($"Player 2 Has Chosen To Play {player2Cards.Item1} And {player2Cards.Item2}");
-                Console.WriteLine($"Player 1 Has Chosen To Play {player1Cards.Item1} And {player1Cards.Item2}");
+                Console.WriteLine($"=== Player 2 Has Chosen To Play {player2Cards.Item1} And {player2Cards.Item2} ===");
+                Console.WriteLine($"=== Player 1 Has Chosen To Play {player1Cards.Item1} And {player1Cards.Item2} ===");
 
 
                 // Check which player has the higher cards point value added together
@@ -116,7 +131,7 @@ namespace LincolnCardGame
                         $"=== You Will Both Draw A Random Card From The Deck To Win {pointsToWin} points ===");
 
             // Logging game statistics
-            Statistics += "\nLast Round Was A Draw, Both Players Drew Random Card To Find Winner\n";
+            GameLog += "\nLast Round Was A Draw, Both Players Drew Random Card To Find Winner\n";
 
             while (true)
             {
@@ -125,7 +140,7 @@ namespace LincolnCardGame
                     Console.Clear();
                     Console.WriteLine("=== Looks Like The Deck Is Empty... This Last Round Will Not Count! ===");
                     // Logging game statistics
-                    Statistics += "Empty Deck - No Round Winner\n";
+                    GameLog += "Empty Deck - No Round Winner\n";
                     break;
                 }
 
@@ -142,7 +157,7 @@ namespace LincolnCardGame
                 {
                     Player2.PointWon(pointsToWin);
                     // Logging game statistics
-                    Statistics += $"Player 2 Drew - {player2Card} And Won\n";
+                    GameLog += $"Player 2 Drew - {player2Card} And Won\n";
                     return;
                 }
 
@@ -150,7 +165,7 @@ namespace LincolnCardGame
                 {
                     Player1.PointWon(pointsToWin);
                     // Logging game statistics
-                    Statistics += $"Player 1 Drew - {player1Card} And Won\n";
+                    GameLog += $"Player 1 Drew - {player1Card} And Won\n";
                     return;
                 }
 
@@ -178,11 +193,11 @@ namespace LincolnCardGame
             {
                 Console.WriteLine("\n=== Looks Like Player 1 Wins! unlucky player 2 :( ===");
                 // Logging game statistics
-                Statistics += "\nFound Winner - Player1\n";
+                GameLog += "\nFound Winner - Player1\n";
                 return;
             }
             // Logging game statistics
-            Statistics += "\nFound Winner - Player2\n";
+            GameLog += "\nFound Winner - Player2\n";
             Console.WriteLine("\n=== Looks Like Player 2 Wins!, unlucky player 1 :( ===");
         }
 
@@ -193,7 +208,7 @@ namespace LincolnCardGame
             Console.WriteLine("=== Both Players Will Draw A Random Card From The Deck To Find A Winner ===");
 
             // Logging game statistics
-            Statistics += "\nGame Was A Draw, Both Player Drew Random Card\n";
+            GameLog += "\nGame Was A Draw, Both Player Drew Random Card\n";
 
             // Both players draw a card from the deck until a winner is found or deck is empty
             while (true)
@@ -203,7 +218,7 @@ namespace LincolnCardGame
                     Console.Clear();
                     Console.WriteLine("=== Looks Like The Deck Is Empty! No Winner Today... :( ===");
                     // Logging game statistics
-                    Statistics += "Empty Deck - No Round Winner\n";
+                    GameLog += "Empty Deck - No Round Winner\n";
                     break;
                 }
 
@@ -220,7 +235,7 @@ namespace LincolnCardGame
                 {
                     Console.WriteLine("\n=== Good Job Player 2 You Win! ===");
                     // Logging game statistics
-                    Statistics += $"Player 2 Drew - {player2Card} And Won\n";
+                    GameLog += $"Player 2 Drew - {player2Card} And Won\n";
                     return;
                 }
 
@@ -228,7 +243,7 @@ namespace LincolnCardGame
                 {
                     Console.WriteLine("\n=== Good Job Player 1 You Win! ===");
                     // Logging game statistics
-                    Statistics += $"Player 1 Drew - {player1Card} And Won\n";
+                    GameLog += $"Player 1 Drew - {player1Card} And Won\n";
                     return;
                 }
 
@@ -241,12 +256,12 @@ namespace LincolnCardGame
         {
             Console.WriteLine("\n=== Thank You For Playing The Lincoln Card Game! ===\n");
 
-            Console.WriteLine($"Overview Of Game Statistics : \n{Statistics}");
+            Console.WriteLine($"Overview Of Game Statistics : \n{GameLog}");
 
             while (true)
             {
                 Console.WriteLine("Type 'restart' To Replay The Game, Or 'end' To End The Game : ");
-                string option = Console.ReadLine()?.Trim().ToLower();
+                string option = Console.ReadLine().Trim().ToLower();
 
                 if (option == "end")
                 {

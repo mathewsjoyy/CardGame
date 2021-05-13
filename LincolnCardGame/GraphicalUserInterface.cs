@@ -4,22 +4,14 @@ namespace LincolnCardGame
 {
     internal class GraphicalUserInterface
     {
-        // Used to change the name,foreground and background colors of the console window
-        public static void SetGui(ConsoleColor foreground, ConsoleColor background, string name, bool displayAscii)
+        // Used to change the name,foreground,background colors and the size of the console window
+        public static void SetGui(ConsoleColor foreground, ConsoleColor background, string name,
+            int height = 35, int width = 145)
         {
-            // Check if ascii art is wanted
-            if (displayAscii)
-            {
-                Console.WriteLine("" +
-                 " _    _             _         ___             _    ___                \n" +
-                 "| |  (_)_ _  __ ___| |_ _    / __|__ _ _ _ __| |  / __|__ _ _ __  ___ \n" +
-                @"| |__| | ' \/ _/ _ \ | ' \  | (__/ _` | '_/ _` | | (_ / _` | '  \/ -_)" + "\n" +
-                @"|____|_|_||_\__\___/_|_||_|  \___\__,_|_| \__,_|  \___\__,_|_|_|_\___|" + "\n");
-            }
-
             Console.ForegroundColor = foreground;
             Console.BackgroundColor = background;
             Console.Title = name;
+            Console.SetWindowSize(145, 35);
         }
     }
 }

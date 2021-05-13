@@ -40,6 +40,7 @@ namespace LincolnCardGame
             }
         }
 
+        // Display every card in hand
         public void Display()
         {
             Console.WriteLine("=== Cards Currently In Your Hand ===");
