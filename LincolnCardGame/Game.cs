@@ -9,7 +9,7 @@ namespace LincolnCardGame
         public Deck Deck { get; private set; }
         public Player Player1 { get; private set; }
         public Player Player2 { get; private set; }
-        public LogFile log { get; private set; } = new LogFile();
+        public LogFile Log { get; private set; } = new LogFile();
 
         // Constructor
         public Game()
@@ -30,7 +30,7 @@ namespace LincolnCardGame
             Player1 = new Human(Deck);
             Player2 = new Computer(Deck);
 
-            log.AddLogMessage("Deck made (and shuffled), Player 1 and Player 2 made");
+            Log.AddLogMessage("Deck made (and shuffled), Player 1 and Player 2 made");
         }
 
         // Display instructions for the user about the lincoln card game
@@ -84,13 +84,14 @@ namespace LincolnCardGame
                     player2Cards = Player2.Play2Cards();
                 }
 
-                log.AddLogMessage($"Round {round} - Player 1 Drew {player1Cards.Item1} + {player1Cards.Item2} = {player1Cards.Item1 + player1Cards.Item2}" +
+                Log.AddLogMessage($"Round {round} - Player 1 Drew {player1Cards.Item1} + {player1Cards.Item2} = {player1Cards.Item1 + player1Cards.Item2}" +
                     $"\t- Player 2 Drew {player2Cards.Item1} + {player2Cards.Item2} = {player2Cards.Item1 + player2Cards.Item2}");
                 round++;
 
-                Console.WriteLine($"=== Player 2 Has Chosen To Play {player2Cards.Item1} And {player2Cards.Item2} ===");
-                Console.WriteLine($"=== Player 1 Has Chosen To Play {player1Cards.Item1} And {player1Cards.Item2} ===");
-
+                Console.WriteLine($"=== Player 2 Has Chosen To Play {player2Cards.Item1} And {player2Cards.Item2}, " +
+                    $"Total = {player2Cards.Item1 + player2Cards.Item2} ===");
+                Console.WriteLine($"=== Player 1 Has Chosen To Play {player1Cards.Item1} And {player1Cards.Item2}, " +
+                    $"Total = {player1Cards.Item1 + player1Cards.Item2} ===");
 
                 // Check which player has the higher cards point value added together
                 if (player1Cards.Item1 + player1Cards.Item2 > player2Cards.Item1 + player2Cards.Item2)
@@ -117,7 +118,6 @@ namespace LincolnCardGame
                                       $"=== You Will Now Play Again To Win {pointsToWin} Points! ===");
                 }
             }
-
             FindWinner();
         }
 
@@ -129,7 +129,7 @@ namespace LincolnCardGame
                         $"=== You Will Both Draw A Random Card From The Deck To Win {pointsToWin} points ===");
 
             // Logging game statistics
-            log.AddLogMessage("Last Round Was A Draw, Both Players Drew Random Card To Find Winner");
+            Log.AddLogMessage("Last Round Was A Draw, Both Players Drew Random Card To Find Winner");
 
             while (true)
             {
@@ -137,7 +137,7 @@ namespace LincolnCardGame
                 {
                     Console.Clear();
                     Console.WriteLine("=== Looks Like The Deck Is Empty... This Last Round Will Not Count! ===");
-                    log.AddLogMessage("Empty Deck - No Round Winner\n");
+                    Log.AddLogMessage("Empty Deck - No Round Winner\n");
                     break;
                 }
 
@@ -153,14 +153,14 @@ namespace LincolnCardGame
                 if (player2Card.PointValue > player1Card.PointValue)
                 {
                     Player2.PointWon(pointsToWin);
-                    log.AddLogMessage($"Player 2 Drew - {player2Card} And Won\n");
+                    Log.AddLogMessage($"Player 2 Drew - {player2Card} And Won\n");
                     return;
                 }
 
                 if (player2Card.PointValue < player1Card.PointValue)
                 {
                     Player1.PointWon(pointsToWin);
-                    log.AddLogMessage($"Player 1 Drew - {player1Card} And Won\n");
+                    Log.AddLogMessage($"Player 1 Drew - {player1Card} And Won\n");
                     return;
                 }
 
@@ -187,10 +187,10 @@ namespace LincolnCardGame
             if (Player1.Score > Player2.Score)
             {
                 Console.WriteLine("\n=== Looks Like Player 1 Wins! unlucky player 2 :( ===");
-                log.AddLogMessage("Found Winner - Player1");
+                Log.AddLogMessage("Found Winner - Player1");
                 return;
             }
-            log.AddLogMessage("Found Winner - Player2");
+            Log.AddLogMessage("Found Winner - Player2");
             Console.WriteLine("\n=== Looks Like Player 2 Wins!, unlucky player 1 :( ===");
         }
 
@@ -200,7 +200,7 @@ namespace LincolnCardGame
         {
             Console.WriteLine("=== Both Players Will Draw A Random Card From The Deck To Find A Winner ===");
 
-            log.AddLogMessage("Game Was A Draw, Both Player Drew Random Card");
+            Log.AddLogMessage("Game Was A Draw, Both Player Drew Random Card");
 
             // Both players draw a card from the deck until a winner is found or deck is empty
             while (true)
@@ -209,7 +209,7 @@ namespace LincolnCardGame
                 {
                     Console.Clear();
                     Console.WriteLine("=== Looks Like The Deck Is Empty! No Winner Today... :( ===");
-                    log.AddLogMessage("Empty Deck - No Round Winner");
+                    Log.AddLogMessage("Empty Deck - No Round Winner");
                     break;
                 }
 
@@ -225,14 +225,14 @@ namespace LincolnCardGame
                 if (player2Card.PointValue > player1Card.PointValue)
                 {
                     Console.WriteLine("\n=== Good Job Player 2 You Win! ===");
-                    log.AddLogMessage($"Player 2 Drew - {player2Card} And Won");
+                    Log.AddLogMessage($"Player 2 Drew - {player2Card} And Won");
                     return;
                 }
 
                 if (player2Card.PointValue < player1Card.PointValue)
                 {
                     Console.WriteLine("\n=== Good Job Player 1 You Win! ===");
-                    log.AddLogMessage($"Player 1 Drew - {player1Card} And Won");
+                    Log.AddLogMessage($"Player 1 Drew - {player1Card} And Won");
                     return;
                 }
 
@@ -245,7 +245,7 @@ namespace LincolnCardGame
         {
             Console.WriteLine("\n=== Thank You For Playing The Lincoln Card Game! ===\n");
 
-            Console.WriteLine($"Overview Of Game Log : \n{log.ReturnLogFileContent()}");
+            Console.WriteLine($"Overview Of Game Log : \n{Log.ReturnLogFileContent()}");
 
             while (true)
             {

@@ -6,7 +6,7 @@ namespace LincolnCardGame
     {
         // Fields
         public int Score { get; private set; }
-        public int Id { get; private set; } = 0;
+        public int Id { get; private set; }
         public Hand PlayerHand { get; private set; }
 
         // Constructor
