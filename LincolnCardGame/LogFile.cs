@@ -3,7 +3,7 @@ using System.IO;
 
 namespace LincolnCardGame
 {
-    internal class LogFile
+    internal class LogFile : IDisplayable
     {
         // Fields
         public string FileName { get; private set; }
@@ -47,10 +47,10 @@ namespace LincolnCardGame
         }
 
         // Open the file to read from and return its contents
-        public string ReturnLogFileContent()
+        public void Display()
         {
             string readText = File.ReadAllText(FileName);
-            return readText;
+            Console.WriteLine(readText);
         }
     }
 }

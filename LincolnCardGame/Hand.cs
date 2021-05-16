@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace LincolnCardGame
 {
-    internal class Hand
+    internal class Hand : IDisplayable
     {
         // Fields
         public List<Card> AHand { get; private set; }

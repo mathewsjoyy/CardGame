@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace LincolnCardGame
+﻿namespace LincolnCardGame
 {
-    internal class Card : IEquatable<Card>
+    internal class Card
     {
         // Fields
         public string Suit { get; private set; }
@@ -44,11 +42,5 @@ namespace LincolnCardGame
 
         // Override ToString method to show values of card when printed
         public override string ToString() => $"{Value} of {Suit}";
-
-        // Checks if two types of card are the same
-        public bool Equals(Card other)
-        {
-            return other != null && Suit == other.Suit && Value == other.Value;
-        }
     }
 }

@@ -1,47 +1,31 @@
 ﻿using System;
-using System.Threading;
 
 namespace LincolnCardGame
 {
     internal class Game : ICardGame
     {
         // Fields
-        public Deck Deck { get; private set; }
+        public LogFile Log { get; private set; } = new LogFile();
+        public Deck Deck { get; private set; } = new Deck();
         public Player Player1 { get; private set; }
         public Player Player2 { get; private set; }
-        public LogFile Log { get; private set; } = new LogFile();
 
         // Constructor
         public Game()
         {
-            // Make a new deck then shuffle it
-            Deck = new Deck();
+            // Shuffle the deck
             Deck.Shuffle();
-
-            // Checks the deck used doesn't contain any 2 of the same cards, if it does end game
-            if (Deck.IsDeckUnique())
-            {
-                Console.WriteLine("\n=== Game Error Occurred! ===\nMessage : Deck contains 2 of the same card");
-                Console.WriteLine("\n=== Game Will End In 8 Seconds ===");
-                Thread.Sleep(8000); Environment.Exit(-1);
-            }
 
             // Make objects of the 2 players for the game, and give both players a unique ID to keep track off
             Player1 = new Human(Deck);
             Player2 = new Computer(Deck);
 
-            Log.AddLogMessage("Deck made (and shuffled), Player 1 and Player 2 made");
+            Log.AddLogMessage("Deck made (and shuffled), Player 1 (Human) and Player 2 (Computer) made");
         }
 
         // Display instructions for the user about the lincoln card game
         public void ShowInstructions()
         {
-            Console.WriteLine("" +
-                 " _    _             _         ___             _    ___                \n" +
-                 "| |  (_)_ _  __ ___| |_ _    / __|__ _ _ _ __| |  / __|__ _ _ __  ___ \n" +
-                @"| |__| | ' \/ _/ _ \ | ' \  | (__/ _` | '_/ _` | | (_ / _` | '  \/ -_)" + "\n" +
-                @"|____|_|_||_\__\___/_|_||_|  \___\__,_|_| \__,_|  \___\__,_|_|_|_\___|" + "\n");
-
             Console.WriteLine("---==== Instructions For The LINCOLN Card Game ====---");
             Console.WriteLine("1. You will play against the computer, and both have 10 cards." +
                 "\n2. Both players draw 2 cards,and player with highest total wins hand (and starts next round)" +
@@ -245,7 +229,7 @@ namespace LincolnCardGame
         {
             Console.WriteLine("\n=== Thank You For Playing The Lincoln Card Game! ===\n");
 
-            Console.WriteLine($"Overview Of Game Log : \n{Log.ReturnLogFileContent()}");
+            Console.WriteLine("Overview Of Game Log :"); Log.Display();
 
             while (true)
             {

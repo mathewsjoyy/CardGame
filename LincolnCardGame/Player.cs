@@ -2,12 +2,12 @@
 
 namespace LincolnCardGame
 {
-    internal abstract class Player
+    internal abstract class Player : IDisplayable
     {
         // Fields
-        public int Score { get; private set; }
-        public int Id { get; private set; }
-        public Hand PlayerHand { get; private set; }
+        public int Score { get; set; }
+        protected int Id { get; set; }
+        public Hand PlayerHand { get; set; }
 
         // Constructor
         protected Player(Deck deck, int id)
@@ -23,7 +23,7 @@ namespace LincolnCardGame
             Console.WriteLine($"\n=== Player {Id} Has Won The Round And {points} Point(s)! Their New Score Is {Score} ===\n");
         }
 
-        // Abstract method to be overridden by child classes
+        // Abstract method to be overridden by child classes to provide functionality to play 2 cards
         public abstract Tuple<Card, Card> Play2Cards();
 
         // Draws 1 random card from a the given deck after it is shuffled
@@ -33,7 +33,7 @@ namespace LincolnCardGame
             return deck.Deal();
         }
 
-        // Displays the player details
+        // Displays the players key details
         public void Display() => Console.WriteLine($"Player {Id} Details:\n>Score : {Score}");
     }
 }

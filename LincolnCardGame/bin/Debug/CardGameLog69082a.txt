@@ -1,8 +1,0 @@
-= Lincoln Card Game Log - 14-05-2021
-11:12:31 - Deck made (and shuffled), Player 1 and Player 2 made
-11:12:33 - Round 1 - Player 1 Drew 3 of Clubs (♣) + Queen of Clubs (♣) = 15	- Player 2 Drew King of Diamonds (♦) + King of Clubs (♣) = 26
-11:12:35 - Round 2 - Player 1 Drew Ace of Hearts (♥) + Ace of Diamonds (♦) = 28	- Player 2 Drew 10 of Spades (♠) + 9 of Hearts (♥) = 19
-11:12:35 - Round 3 - Player 1 Drew King of Spades (♠) + 5 of Hearts (♥) = 18	- Player 2 Drew 8 of Spades (♠) + 8 of Clubs (♣) = 16
-11:12:36 - Round 4 - Player 1 Drew 6 of Clubs (♣) + 5 of Diamonds (♦) = 11	- Player 2 Drew 5 of Clubs (♣) + 4 of Diamonds (♦) = 9
-11:12:38 - Round 5 - Player 1 Drew 7 of Hearts (♥) + 3 of Hearts (♥) = 10	- Player 2 Drew 3 of Spades (♠) + 2 of Hearts (♥) = 5
-11:12:38 - Found Winner - Player1

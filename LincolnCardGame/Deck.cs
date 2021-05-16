@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LincolnCardGame
 {
-    internal class Deck
+    internal class Deck : IDisplayable
     {
         // Fields
         public List<Card> DeckOfCards { get; private set; }
@@ -45,7 +45,6 @@ namespace LincolnCardGame
                 DeckOfCards[rng] = DeckOfCards[count];
                 DeckOfCards[count] = value;
             }
-            Console.WriteLine("( The Deck Has Been Shuffled! )\n");
         }
 
         public Card Deal()
@@ -61,20 +60,9 @@ namespace LincolnCardGame
         // Returns true or false depending on if deck is empty
         public bool IsEmpty() => DeckOfCards.Count < 1;
 
-        // Checks if the current deck is unique in cards (doesn't contain 2 of the same cards)
-        public bool IsDeckUnique()
+        public void Display()
         {
-            foreach (Card card1 in DeckOfCards)
-            {
-                foreach (Card card2 in DeckOfCards)
-                {
-                    if (card1.Equals(card2))
-                    {
-                        return false;
-                    }
-                }
-            }
-            return true;
+            DeckOfCards.ForEach(card => Console.WriteLine(card));
         }
     }
 }
