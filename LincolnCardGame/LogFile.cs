@@ -11,7 +11,7 @@ namespace LincolnCardGame
         // Generate a text log file with a unique name
         public LogFile()
         {
-            string fileName = "CardGameLog" + Guid.NewGuid().ToString().Substring(0, 6) + ".txt";
+            string fileName = "CardGameLog_" + Guid.NewGuid().ToString().Substring(0, 6) + ".txt";
 
             FileName = fileName;
 
@@ -26,8 +26,8 @@ namespace LincolnCardGame
 
         public void LogFileInfo()
         {
-            Console.WriteLine("(Game Log File Has Been Generated To Access The File " +
-                $"Visit Bin > Debug > {FileName})");
+            Console.WriteLine("( Game Log File Has Been Generated To Access The File " +
+                $"Visit Bin > Debug > {FileName} )");
         }
 
         // Adds a message to log file

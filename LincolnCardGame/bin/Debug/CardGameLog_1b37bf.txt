@@ -1,0 +1,2 @@
+= Lincoln Card Game Log - 16-05-2021
+10:16:35 - Deck made (and shuffled), Player 1 (Human) and Player 2 (Computer) made

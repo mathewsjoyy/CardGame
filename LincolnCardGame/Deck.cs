@@ -28,7 +28,7 @@ namespace LincolnCardGame
                     DeckOfCards.Add(new Card(suit, value));
                 }
             }
-            Console.WriteLine($"( Deck Of {DeckOfCards.Count} Cards Created (No Jokers) )");
+            Console.WriteLine($"( Deck Of {DeckOfCards.Count} Cards Created (No Jokers) )\n");
         }
 
         // Shuffles the deck randomly

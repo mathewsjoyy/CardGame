@@ -18,22 +18,29 @@
         // Gets a cards point value and assigns it to the pointValue field
         private int SetCardPointValue(string value)
         {
-            switch (value)
+            if (int.TryParse(value, out _))
             {
-                case "Jack":
-                    return 11;
+                return int.Parse(value);
+            }
+            else
+            {
+                switch (value)
+                {
+                    case "Jack":
+                        return 11;
 
-                case "Queen":
-                    return 12;
+                    case "Queen":
+                        return 12;
 
-                case "King":
-                    return 13;
+                    case "King":
+                        return 13;
 
-                case "Ace":
-                    return 14;
+                    case "Ace":
+                        return 14;
 
-                default:
-                    return int.Parse(value);
+                    default:
+                        return 0;
+                }
             }
         }
 
