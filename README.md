@@ -25,7 +25,7 @@ cards - highest wins.
 If the final hands are the same value, draw a random card from the remaining cards -
 highest wins the hand. 
 
-# UML Design
+# UML Design (basic - is expanded upon in final game)
 ![](images/uml.png)
 
 # Knowledge and Skill gained/assessed
