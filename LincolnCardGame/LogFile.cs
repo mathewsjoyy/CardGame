@@ -11,14 +11,14 @@ namespace LincolnCardGame
         // Generate a text log file with a unique name
         public LogFile()
         {
-            string fileName = "CardGameLog_" + Guid.NewGuid().ToString().Substring(0, 6) + ".txt";
-
+            string fileName = "GameLog_" + $"{DateTime.Now:dd-MM-yyyy}_" +
+                              Guid.NewGuid().ToString().Substring(0, 6) + ".txt";
             FileName = fileName;
 
             // Create a file to write to in bin > debug
             using (StreamWriter sw = File.CreateText(FileName))
             {
-                sw.WriteLine($"= Lincoln Card Game Log - {DateTime.Now:dd-MM-yyyy}");
+                sw.WriteLine($"=== Lincoln Card Game Log - {DateTime.Now:dddd, dd MMMM yyyy} ===");
             }
 
             LogFileInfo();
@@ -26,18 +26,19 @@ namespace LincolnCardGame
 
         public void LogFileInfo()
         {
-            Console.WriteLine("( Game Log File Has Been Generated To Access The File " +
+            Console.WriteLine("( Game Log File Has Been Generated - To Access The File " +
                 $"Visit Bin > Debug > {FileName} )");
         }
 
         // Adds a message to log file
-        public void AddLogMessage(string message)
+        public void LogMessage(string message)
         {
             if (File.Exists(FileName))
             {
                 using (StreamWriter sw = File.AppendText(FileName))
                 {
-                    sw.WriteLine($"{DateTime.Now:hh:mm:ss} - {message}");
+                    sw.WriteLine($"-->New Log Entry : {DateTime.Now:hh:mm:ss tt}:");
+                    sw.WriteLine($"   Message : {message}");
                 }
             }
             else

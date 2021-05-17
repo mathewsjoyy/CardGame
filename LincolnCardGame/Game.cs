@@ -20,7 +20,7 @@ namespace LincolnCardGame
             Player1 = new Human(Deck);
             Player2 = new Computer(Deck);
 
-            Log.AddLogMessage("Deck made (and shuffled), Player 1 (Human) and Player 2 (Computer) made");
+            Log.LogMessage("Deck made (and shuffled), Player 1 (Human) and Player 2 (Computer) made");
         }
 
         // Display instructions for the user about the lincoln card game
@@ -68,8 +68,8 @@ namespace LincolnCardGame
                     player2Cards = Player2.Play2Cards();
                 }
 
-                Log.AddLogMessage($"Round {round} - Player 1 Drew {player1Cards.Item1} + {player1Cards.Item2} = {player1Cards.Item1 + player1Cards.Item2}" +
-                    $"\t- Player 2 Drew {player2Cards.Item1} + {player2Cards.Item2} = {player2Cards.Item1 + player2Cards.Item2}");
+                Log.LogMessage($"Round {round} - Player 1 Drew {player1Cards.Item1} + {player1Cards.Item2} = {player1Cards.Item1 + player1Cards.Item2}" +
+                    $"  - Player 2 Drew {player2Cards.Item1} + {player2Cards.Item2} = {player2Cards.Item1 + player2Cards.Item2}");
                 round++;
 
                 Console.WriteLine($"=== Player 2 Has Chosen To Play {player2Cards.Item1} And {player2Cards.Item2}, " +
@@ -113,7 +113,7 @@ namespace LincolnCardGame
                         $"=== You Will Both Draw A Random Card From The Deck To Win {pointsToWin} points ===");
 
             // Logging game statistics
-            Log.AddLogMessage("Last Round Was A Draw, Both Players Drew Random Card To Find Winner");
+            Log.LogMessage("Last Round Was A Draw, Both Players Drew Random Card To Find Winner");
 
             while (true)
             {
@@ -121,7 +121,7 @@ namespace LincolnCardGame
                 {
                     Console.Clear();
                     Console.WriteLine("=== Looks Like The Deck Is Empty... This Last Round Will Not Count! ===");
-                    Log.AddLogMessage("Empty Deck - No Round Winner\n");
+                    Log.LogMessage("Empty Deck - No Round Winner\n");
                     break;
                 }
 
@@ -137,14 +137,14 @@ namespace LincolnCardGame
                 if (player2Card.PointValue > player1Card.PointValue)
                 {
                     Player2.PointWon(pointsToWin);
-                    Log.AddLogMessage($"Player 2 Drew - {player2Card} And Won\n");
+                    Log.LogMessage($"Player 2 Drew - {player2Card} And Won\n");
                     return;
                 }
 
                 if (player2Card.PointValue < player1Card.PointValue)
                 {
                     Player1.PointWon(pointsToWin);
-                    Log.AddLogMessage($"Player 1 Drew - {player1Card} And Won\n");
+                    Log.LogMessage($"Player 1 Drew - {player1Card} And Won\n");
                     return;
                 }
 
@@ -171,10 +171,10 @@ namespace LincolnCardGame
             if (Player1.Score > Player2.Score)
             {
                 Console.WriteLine("\n=== Looks Like Player 1 Wins! unlucky player 2 :( ===");
-                Log.AddLogMessage("Found Winner - Player1");
+                Log.LogMessage("Found Winner - Player1");
                 return;
             }
-            Log.AddLogMessage("Found Winner - Player2");
+            Log.LogMessage("Found Winner - Player2");
             Console.WriteLine("\n=== Looks Like Player 2 Wins!, unlucky player 1 :( ===");
         }
 
@@ -184,7 +184,7 @@ namespace LincolnCardGame
         {
             Console.WriteLine("=== Both Players Will Draw A Random Card From The Deck To Find A Winner ===");
 
-            Log.AddLogMessage("Game Was A Draw, Both Player Drew Random Card");
+            Log.LogMessage("Game Was A Draw, Both Player Drew Random Card");
 
             // Both players draw a card from the deck until a winner is found or deck is empty
             while (true)
@@ -193,7 +193,7 @@ namespace LincolnCardGame
                 {
                     Console.Clear();
                     Console.WriteLine("=== Looks Like The Deck Is Empty! No Winner Today... :( ===");
-                    Log.AddLogMessage("Empty Deck - No Round Winner");
+                    Log.LogMessage("Empty Deck - No Round Winner");
                     break;
                 }
 
@@ -209,14 +209,14 @@ namespace LincolnCardGame
                 if (player2Card.PointValue > player1Card.PointValue)
                 {
                     Console.WriteLine("\n=== Good Job Player 2 You Win! ===");
-                    Log.AddLogMessage($"Player 2 Drew - {player2Card} And Won");
+                    Log.LogMessage($"Player 2 Drew - {player2Card} And Won");
                     return;
                 }
 
                 if (player2Card.PointValue < player1Card.PointValue)
                 {
                     Console.WriteLine("\n=== Good Job Player 1 You Win! ===");
-                    Log.AddLogMessage($"Player 1 Drew - {player1Card} And Won");
+                    Log.LogMessage($"Player 1 Drew - {player1Card} And Won");
                     return;
                 }
 
