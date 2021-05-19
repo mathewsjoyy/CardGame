@@ -46,16 +46,19 @@ namespace LincolnCardGame
             }
         }
 
-        // Operator overloading to add 2 cards together by their point value
+        // Operator overloading to compare cards by their PointValue
         public static int operator +(Card card1, Card card2) => card1.PointValue + card2.PointValue;
-
-        // Override ToString method to show values of card when printed
-        public override string ToString() => $"{Value} of {Suit}";
+        public static int operator -(Card card1, Card card2) => card1.PointValue - card2.PointValue;
+        public static bool operator >(Card card1, Card card2) => card1.PointValue > card2.PointValue;
+        public static bool operator <(Card card1, Card card2) => card1.PointValue < card2.PointValue;
 
         // Compare 2 cards
         public bool Equals(Card other)
         {
-            return Suit == other.Suit && Value == other.Value;
+            return other != null && Suit == other.Suit && Value == other.Value;
         }
+
+        // Override ToString method to show values of card when printed
+        public override string ToString() => $"{Value} of {Suit}";
     }
 }

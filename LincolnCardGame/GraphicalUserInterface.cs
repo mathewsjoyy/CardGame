@@ -11,7 +11,7 @@ namespace LincolnCardGame
             Console.ForegroundColor = foreground;
             Console.BackgroundColor = background;
             Console.Title = name;
-            Console.SetWindowSize(150, 35);
+            Console.SetWindowSize(160, 35);
         }
     }
 }

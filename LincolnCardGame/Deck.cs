@@ -6,12 +6,11 @@ namespace LincolnCardGame
     internal class Deck : IDisplayable
     {
         // Fields
-        public List<Card> DeckOfCards { get; private set; }
+        public List<Card> DeckOfCards { get; private set; } = new List<Card>();
 
         // Constructor
         public Deck()
         {
-            DeckOfCards = new List<Card>();
             CreateStandardDeck();
         }
 

@@ -1,0 +1,15 @@
+=== Lincoln Card Game Log - Wednesday, 19 May 2021 ===
+-->New Log Entry : 10:20:05 PM:
+   Message : Deck made (and shuffled), Player 1 (Human) and Player 2 (Computer) made
+-->New Log Entry : 10:27:58 PM:
+   Message : Round 1 - Player 1 Drew 2 of Clubs (♣) + Queen of Clubs (♣) = 14  - Player 2 Drew King of Spades (♠) + King of Clubs (♣) = 26
+-->New Log Entry : 10:35:47 PM:
+   Message : Round 2 - Player 1 Drew 5 of Diamonds (♦) + 9 of Clubs (♣) = 14  - Player 2 Drew Jack of Hearts (♥) + Jack of Clubs (♣) = 22
+-->New Log Entry : 10:36:02 PM:
+   Message : Round 3 - Player 1 Drew 5 of Clubs (♣) + 6 of Diamonds (♦) = 11  - Player 2 Drew 10 of Clubs (♣) + 9 of Diamonds (♦) = 19
+-->New Log Entry : 10:36:14 PM:
+   Message : Round 4 - Player 1 Drew 7 of Diamonds (♦) + 2 of Hearts (♥) = 9  - Player 2 Drew 7 of Clubs (♣) + 6 of Spades (♠) = 13
+-->New Log Entry : 10:36:38 PM:
+   Message : Round 5 - Player 1 Drew 4 of Spades (♠) + King of Diamonds (♦) = 17  - Player 2 Drew 4 of Diamonds (♦) + 3 of Hearts (♥) = 7
+-->New Log Entry : 10:36:38 PM:
+   Message : Found Winner - Player2

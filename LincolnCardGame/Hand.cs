@@ -7,21 +7,19 @@ namespace LincolnCardGame
     internal class Hand : IDisplayable
     {
         // Fields
-        public List<Card> AHand { get; private set; }
+        public List<Card> AHand { get; private set; } = new List<Card>();
 
         // Creates a new hand and assigns 10 cards from deck
         public Hand(Deck deck)
         {
-            AHand = new List<Card>();
-
             try
             {
                 GetAHand(deck);
             }
             catch (NotEnoughCardsException ex)
             {
-                Console.WriteLine(ex.Message);
-                Console.WriteLine("Press Any Key To Exit The Game! And Check Your Deck.");
+                Console.WriteLine(ex);
+                Console.WriteLine("Press Any Key To Exit The Game! And Check Your Deck: ");
                 Console.ReadKey();
                 Environment.Exit(-1);
             }
@@ -32,24 +30,12 @@ namespace LincolnCardGame
         {
             if (deck.DeckOfCards.Count < 10)
             {
-                throw new NotEnoughCardsException();
+                throw new NotEnoughCardsException("Not Enough Cards In Deck");
             }
 
             for (int i = 0; i < 10; i++)
             {
                 AHand.Add(deck.Deal());
-            }
-        }
-
-        // Display every card in hand
-        public void Display()
-        {
-            Console.WriteLine($"=== Cards Currently In Hand ===");
-            int cardCounter = 1;
-            foreach (Card card in AHand)
-            {
-                Console.WriteLine($"[{cardCounter}] {card}");
-                cardCounter++;
             }
         }
 
@@ -60,6 +46,18 @@ namespace LincolnCardGame
         public void SortHand()
         {
             AHand = AHand.OrderByDescending(card => card.PointValue).ToList();
+        }
+
+        // Display every card in hand
+        public void Display()
+        {
+            Console.WriteLine("=== Cards Currently In Hand ===");
+            int cardCounter = 1;
+            foreach (Card card in AHand)
+            {
+                Console.WriteLine($"[{cardCounter}] {card}");
+                cardCounter++;
+            }
         }
     }
 }

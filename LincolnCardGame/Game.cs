@@ -4,16 +4,29 @@ namespace LincolnCardGame
 {
     internal class Game : ICardGame
     {
-        // Fields
-        public LogFile Log { get; private set; } = new LogFile();
-        public Deck Deck { get; private set; } = new Deck();
+        // Fields / Properties
+        public LogFile Log { get; private set; }
+        public Deck Deck { get; private set; }
         public Player Player1 { get; private set; }
         public Player Player2 { get; private set; }
 
         // Constructor
         public Game()
         {
-            // Shuffle the deck
+            // Set the console graphical layout
+            GraphicalUserInterface.SetGui(ConsoleColor.Green, ConsoleColor.Black, "Lincoln Card Game");
+
+            // Set all the fields/properties
+            InitializeNewGame();
+        }
+
+        private void InitializeNewGame()
+        {
+            // Make a new logger
+            Log = new LogFile();
+
+            // Make a deck and shuffle it
+            Deck = new Deck();
             Deck.Shuffle();
 
             // Make objects of the 2 players for the game, and give both players a unique ID to keep track off
@@ -57,13 +70,13 @@ namespace LincolnCardGame
                 // Check who won the previous round and let that player go first
                 if (roundWinner == "player2")
                 {
-                    Console.WriteLine($"=== Round {round} - Player 2 Has Chosen Cards First ===\n");
+                    Console.WriteLine($"=== ROUND {round}! - Player 2 Has Chosen Cards First ===\n");
                     player2Cards = Player2.Play2Cards();
                     player1Cards = Player1.Play2Cards();
                 }
                 else
                 {
-                    Console.WriteLine($"=== Round {round} - Player 1 Will Choose Cards First ===\n");
+                    Console.WriteLine($"=== ROUND {round}! - Player 1 Will Choose Cards First ===\n");
                     player1Cards = Player1.Play2Cards();
                     player2Cards = Player2.Play2Cards();
                 }
@@ -134,18 +147,16 @@ namespace LincolnCardGame
                 Card player1Card = Player1.DrawARandomCard(Deck);
                 Console.WriteLine($"\n=== Player 1 Has Taken A Random Card And Got {player1Card} ===");
 
-                if (player2Card.PointValue > player1Card.PointValue)
+                if (player2Card > player1Card)
                 {
                     Player2.PointWon(pointsToWin);
-                    Log.LogMessage($"Player 2 Drew - {player2Card} And Won\n");
-                    return;
+                    Log.LogMessage($"Player 2 Drew - {player2Card} And Won\n"); return;
                 }
 
-                if (player2Card.PointValue < player1Card.PointValue)
+                if (player2Card < player1Card)
                 {
                     Player1.PointWon(pointsToWin);
-                    Log.LogMessage($"Player 1 Drew - {player1Card} And Won\n");
-                    return;
+                    Log.LogMessage($"Player 1 Drew - {player1Card} And Won\n"); return;
                 }
 
                 Console.WriteLine("\n=== Its A Draw! Lets Try Again ===");
@@ -164,15 +175,13 @@ namespace LincolnCardGame
             if (Player1.Score == Player2.Score)
             {
                 Console.WriteLine("\n=== Looks Like A Draw! Time For A Tie Breaker ===");
-                FinalTieBreaker();
-                return;
+                FinalTieBreaker(); return;
             }
 
             if (Player1.Score > Player2.Score)
             {
                 Console.WriteLine("\n=== Looks Like Player 1 Wins! unlucky player 2 :( ===");
-                Log.LogMessage("Found Winner - Player1");
-                return;
+                Log.LogMessage("Found Winner - Player1"); return;
             }
             Log.LogMessage("Found Winner - Player2");
             Console.WriteLine("\n=== Looks Like Player 2 Wins!, unlucky player 1 :( ===");
@@ -206,18 +215,16 @@ namespace LincolnCardGame
                 Card player1Card = Player1.DrawARandomCard(Deck);
                 Console.WriteLine($"\n=== You Have Taken A Random Card And Got {player1Card} ===");
 
-                if (player2Card.PointValue > player1Card.PointValue)
+                if (player2Card > player1Card)
                 {
                     Console.WriteLine("\n=== Good Job Player 2 You Win! ===");
-                    Log.LogMessage($"Player 2 Drew - {player2Card} And Won");
-                    return;
+                    Log.LogMessage($"Player 2 Drew - {player2Card} And Won"); return;
                 }
 
-                if (player2Card.PointValue < player1Card.PointValue)
+                if (player2Card < player1Card)
                 {
                     Console.WriteLine("\n=== Good Job Player 1 You Win! ===");
-                    Log.LogMessage($"Player 1 Drew - {player1Card} And Won");
-                    return;
+                    Log.LogMessage($"Player 1 Drew - {player1Card} And Won"); return;
                 }
 
                 Console.WriteLine("\n=== Its A Draw! Lets Try Again ===");
@@ -228,7 +235,6 @@ namespace LincolnCardGame
         public void EndGame()
         {
             Console.WriteLine("\n=== Thank You For Playing The Lincoln Card Game! ===\n");
-
             Console.WriteLine("Overview Of Game Log :"); Log.Display();
 
             while (true)
@@ -243,10 +249,10 @@ namespace LincolnCardGame
                 else if (option == "restart")
                 {
                     Console.Clear();
+                    InitializeNewGame();
                     break;
                 }
-                Console.Clear();
-                Console.WriteLine("Invalid Input Try Again");
+                Console.WriteLine("\nInvalid Input Try Again");
             }
         }
     }
